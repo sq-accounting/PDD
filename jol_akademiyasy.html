@@ -465,6 +465,43 @@ body{transition:background .25s ease,color .25s ease}
 .confirm-btns{display:flex;gap:10px;margin-top:22px}
 .confirm-btns .btn{flex:1}
 
+/* tips / lifehacks */
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+.tip-card{padding:20px 22px}
+.tip-head{display:flex;align-items:center;gap:13px;margin-bottom:15px}
+.tip-ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;flex:none}
+.tip-ic svg{width:25px;height:25px}
+.tip-head b{font-family:var(--fd);font-weight:700;font-size:21px;line-height:1.08}
+.tip-list{list-style:none;display:grid;gap:12px}
+.tip-list li{display:flex;gap:12px;font-size:15.5px;line-height:1.45}
+.tip-list li .n{width:23px;height:23px;border-radius:7px;flex:none;background:var(--surface-3);color:var(--muted);
+  font-family:var(--fm);font-weight:700;font-size:12px;display:grid;place-items:center;margin-top:1px}
+@media(max-width:880px){ .tips-grid{grid-template-columns:1fr} }
+
+/* settings */
+.set-wrap{max-width:680px;margin:0 auto}
+.set-card{padding:20px 22px;margin-bottom:14px}
+.set-card h3{font-family:var(--fd);font-weight:700;font-size:19px;margin-bottom:4px;display:flex;align-items:center;gap:9px}
+.set-card h3 svg{width:20px;height:20px;color:var(--amber-deep);flex:none}
+.set-card .desc{font-size:14px;color:var(--muted);margin-bottom:15px;line-height:1.45}
+.set-opts{display:flex;gap:9px;flex-wrap:wrap}
+.set-opt{font-family:var(--fd);font-weight:600;font-size:16px;padding:11px 17px;border-radius:11px;
+  background:var(--surface-2);border:1.5px solid var(--line);color:var(--muted);transition:all .13s;text-align:left;flex:1;min-width:130px}
+.set-opt:hover{border-color:var(--lane);color:var(--ink)}
+.set-opt.on{background:var(--asphalt);color:#fff;border-color:var(--asphalt)}
+.set-opt small{display:block;font-family:var(--fb);font-weight:500;font-size:11.5px;opacity:.72;margin-top:2px}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.switch{position:relative;width:50px;height:28px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.switch .sl{position:absolute;inset:0;border-radius:20px;background:var(--surface-3);border:1px solid var(--line);transition:background .15s,border-color .15s}
+.switch .sl::before{content:"";position:absolute;left:3px;top:2.5px;width:21px;height:21px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .18s}
+.switch input:checked + .sl{background:var(--green);border-color:var(--green)}
+.switch input:checked + .sl::before{transform:translateX(21px)}
+
+/* reduce motion (user setting) */
+html.reduce-motion *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:0s!important;scroll-behavior:auto!important}
+
 /* ---------- DARK THEME ---------- */
 html[data-theme="dark"]{
   --asphalt:#0E1216; --ink:#E8ECF1; --paper:#0E1115; --surface:#191E24;
@@ -510,6 +547,7 @@ html[data-theme="dark"] .result-badge.pass{background:radial-gradient(circle at 
     <div class="hdr-actions">
       <div class="mrp-pill">1 АЕК = 4 325 ₸<small>2026 жыл</small></div>
       <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Жарық/түнгі режим" title="Тақырыпты ауыстыру"></button>
+      <button class="icon-btn" onclick="go('settings')" aria-label="Баптаулар" title="Баптаулар"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
     </div>
   </div>
 </header>
@@ -544,6 +582,10 @@ const PROG = Store.get('jol_prog') || { signsSeen:{}, topicsBest:{}, examBest:0,
 if(!PROG.lessonsRead) PROG.lessonsRead = {};
 function saveProg(){ Store.set('jol_prog', PROG); }
 
+const SETTINGS = Object.assign({ theme:'system', examMode:'official', reduceMotion:false }, Store.get('jol_settings') || {});
+function saveSettings(){ Store.set('jol_settings', SETTINGS); }
+const EXAM_MODES = { official:{q:40,min:40}, short:{q:20,min:20}, quick:{q:10,min:10} };
+
 const MRP = 4325; // АЕК 2026
 const fmtTg = n => n.toLocaleString('ru-RU').replace(/,/g,' ') + ' ₸';
 
@@ -557,7 +599,13 @@ const NEWS = [
 ];
 
 /* ---- exam quick facts ---- */
-const EXAM = { q:40, min:40, pass:32, tries:3, valid:2 };
+let EXAM = { q:40, min:40, pass:32, tries:3, valid:2 };
+function applyExamMode(){
+  const m = EXAM_MODES[SETTINGS.examMode] || EXAM_MODES.official;
+  EXAM.q = Math.min(m.q, QUESTIONS.length);
+  EXAM.min = m.min;
+  EXAM.pass = Math.round(EXAM.q*0.8);
+}
 
 /* ============================================================
    ЖОЛ БЕЛГІЛЕРІ — inline SVG (viewBox 0 0 100 100)
@@ -918,7 +966,9 @@ const IC = {
   search: svgI('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'),
   check: svgI('<path d="M5 13l4 4L19 7"/>'),
   trash: svgI('<path d="M4 7h16M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M6.5 7l1 12.5A1.5 1.5 0 0 0 9 21h6a1.5 1.5 0 0 0 1.5-1.5L17.5 7"/>'),
-  warnTri: svgI('<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>')
+  warnTri: svgI('<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>'),
+  tips: svgI('<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.8 10.6c.6.5.8 1 .8 1.9h6c0-.9.2-1.4.8-1.9A6 6 0 0 0 12 3z"/>'),
+  gear: svgI('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>')
 };
 
 const TOPICS = ['Жалпы ережелер','Жол белгілері','Жол таңбалары','Бағдаршам','Басымдық','Жылдамдық','Тоқтау/тұрақ','Маневр','Қауіпсіздік'];
@@ -938,7 +988,7 @@ function readiness(){
   const sc = Object.keys(PROG.signsSeen).length / SIGNS.length;
   let tsum=0; TOPICS.forEach(t=> tsum += (PROG.topicsBest[t]||0));
   const tc = tsum / (TOPICS.length*100);
-  const ex = (PROG.examBest||0) / EXAM.q;
+  const ex = (PROG.examBest||0) / 40;
   const lr = Object.keys(PROG.lessonsRead||{}).length / LESSONS.length;
   return Math.round((sc*0.20 + tc*0.30 + ex*0.35 + lr*0.15)*100);
 }
@@ -954,7 +1004,8 @@ const NAV = [
   ['xroad','Қиылыс',IC.cross],
   ['test','Тест',IC.list],
   ['exam','Емтихан',IC.exam],
-  ['fines','Айыппұл',IC.fine]
+  ['fines','Айыппұл',IC.fine],
+  ['tips','Лайфхактар',IC.tips]
 ];
 let curView='home', curLesson=0, quiz=null;
 
@@ -969,7 +1020,7 @@ function go(v){
   const md=document.getElementById('modal'); if(md) md.classList.remove('open');
   curView=v; renderNav(); window.scrollTo({top:0,behavior:'instant'});
   ({home:renderHome, theory:renderTheory, video:renderVideo, signs:renderSigns, xroad:renderXroad,
-    test:renderTest, exam:renderExam, fines:renderFines}[v])();
+    test:renderTest, exam:renderExam, fines:renderFines, tips:renderTips, settings:renderSettings}[v])();
 }
 
 /* ============================================================
@@ -984,7 +1035,7 @@ function renderHome(){
   const stats = [
     [`${seen}/${SIGNS.length}`,'Меңгерілген белгі',IC.sign,'#A9750A','#fcedcb'],
     [`${tA}/${TOPICS.length}`,'Өтілген тақырып',IC.list,'#1B5FB0','#e7f0fb'],
-    [`${PROG.examBest||0}/${EXAM.q}`,'Емтихан үздігі',IC.exam,'#E0392F','#fbe3e1'],
+    [`${PROG.examBest||0}/40`,'Емтихан үздігі',IC.exam,'#E0392F','#fbe3e1'],
     [`${PROG.examTries||0}`,'Емтихан әрекеті',IC.clock,'#1E9D55','#dcf2e5']
   ];
   const mods = [
@@ -1163,16 +1214,27 @@ function resetProgress(){
   });
 }
 
-/* ---- theme ---- */
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme', t);
-  const b=document.getElementById('themeBtn'); if(b) b.innerHTML = t==='dark'? IC.sun : IC.moon;
-  const m=document.querySelector('meta[name="theme-color"]'); if(m) m.content = t==='dark'? '#0E1216' : '#14171B';
+/* ---- theme & settings ---- */
+function resolveTheme(){
+  return SETTINGS.theme==='system'
+    ? ((window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) ? 'dark' : 'light')
+    : SETTINGS.theme;
+}
+function applyTheme(){
+  const eff = resolveTheme();
+  document.documentElement.setAttribute('data-theme', eff);
+  const b=document.getElementById('themeBtn'); if(b) b.innerHTML = eff==='dark'? IC.sun : IC.moon;
+  const m=document.querySelector('meta[name="theme-color"]'); if(m) m.content = eff==='dark'? '#0E1216' : '#14171B';
 }
 function toggleTheme(){
-  const next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
-  Store.set('jol_theme', next); applyTheme(next);
+  SETTINGS.theme = resolveTheme()==='dark' ? 'light' : 'dark';
+  saveSettings(); applyTheme();
+  if(curView==='settings') renderSettings();
 }
+function setTheme(mode){ SETTINGS.theme=mode; saveSettings(); applyTheme(); if(curView==='settings') renderSettings(); }
+function setExamMode(mode){ SETTINGS.examMode=mode; saveSettings(); applyExamMode(); if(curView==='settings') renderSettings(); }
+function applyReduceMotion(){ document.documentElement.classList.toggle('reduce-motion', !!SETTINGS.reduceMotion); }
+function setReduceMotion(v){ SETTINGS.reduceMotion=!!v; saveSettings(); applyReduceMotion(); }
 
 /* ---- keyboard support for quiz runner ---- */
 document.addEventListener('keydown', e=>{
@@ -1674,6 +1736,105 @@ function renderFines(){
 }
 
 /* ============================================================
+   ЛАЙФХАКТАР
+   ============================================================ */
+const TIPS = [
+  [IC.exam,'#E0392F','#fbe3e1','Емтихан тактикасы',[
+    'Алдымен сенімді білетін сұрақтарды жауаптап, күмәнділерді «Белгілеу» арқылы соңына қалдырыңыз.',
+    'Жауапсыз сұрақ — қате болып есептеледі. Уақыт бітерде барлық бос сұраққа болса да белгі қойыңыз.',
+    'Сұрақты түбегейлі оқыңыз: «болмайды», «дұрыс емес», «міндетті» деген сөздер мағынаны өзгертеді.',
+    'Орта есеппен әр сұраққа ~1 минут. Бір сұраққа тұрып қалмай, келесіге өтіп, кейін оралыңыз.'
+  ]],
+  [IC.sign,'#A9750A','#fcedcb','Белгілерді есте сақтау',[
+    'Пішін мен түс — басты кілт: үшбұрыш = ескерту, қызыл шеңбер = тыйым, көк дөңгелек = міндет.',
+    'Қызыл — «жоқ/тыйым», көк — «істе/бағыт». Осы екеуін шатастырмасаңыз, жартысы дайын.',
+    'Сегізбұрыш дүниеде жалғыз — STOP. Оны әрқашан «толық тоқта» деп жаттаңыз.',
+    'Сары ромб = басты жол, кері үшбұрыш = жол бер. Бұл екеуі — қиылыстың «иесі мен қонағы».'
+  ]],
+  [IC.cross,'#1B5FB0','#e7f0fb','Қиылыс логикасы',[
+    'Реттілік: реттеуші → бағдаршам → басымдық белгісі → «оңнан кедергі». Жоғарысы төменін жояды.',
+    'Белгі жоқ, жабыны бірдей жол болса — әрқашан оң жақтан келе жатқанға жол беріңіз.',
+    'Солға не кері бұрылғанда қарсыдан тура келе жатқан көлікті әрдайым алдымен өткізіңіз.',
+    'Шеңберге кірген көлік ішіндегіге жол береді (ҚР-да 2017 жылдан бері осылай).'
+  ]],
+  [IC.home,'#1E9D55','#dcf2e5','Қалада сенімді жүру',[
+    '«2–3 секунд» ережесі: алдыңғы көлік белгілі бір нүктеден өткен соң санаңыз — қашықтық сонша болсын.',
+    'Айналарды әр 5–8 секунд сайын тексеріп, бұрылар алдында «соқыр аймаққа» басыңызды бұрып қараңыз.',
+    'Маневрден бұрын көрсеткішті ерте қосыңыз — бұл өзгелерге ниетіңізді алдын ала білдіреді.',
+    'Жаяу өткел мен аялдама тұсында жылдамдықты алдын ала бәсеңдетіп, тоқтауға дайын болыңыз.'
+  ]],
+  [IC.clock,'#0E6E9C','#dceef7','Қиын жағдай мен қыс',[
+    'Сырғанақ жолда жұмсақ басқарыңыз: кенет тежеу мен күрт бұрылыстан аулақ болыңыз.',
+    'Қашықтықты 2 есеге арттырыңыз — мұзда тежелу жолы бірнеше есе ұзарады.',
+    'Тұман мен жаңбырда жақын жарықпен жүріңіз; алыс жарық тамшыдан шағылысып, көруді нашарлатады.',
+    'Шаршаған, ұйқысы қанбаған күйде жүрмеңіз — бұл алкоголь дәрежесіндей қауіпті.'
+  ]],
+  [IC.book,'#6B4FBB','#ece6fb','Тиімді дайындалу',[
+    'Әр күні аз да болса тұрақты қайталаңыз — 20 минуттан 5 күн бір отырыста 2 сағаттан тиімдірек.',
+    'Қатені талдау — алтын кілт: емтиханнан кейінгі «Қателерді талдау» бөлімін міндетті оқыңыз.',
+    'Алдымен теорияны оқып, сосын сол тақырыптың тестін тапсырыңыз — байланыс берік болады.',
+    'Дайындық индексі 70%-дан асқанда ғана нақты емтиханға жазылған жөн.'
+  ]]
+];
+function renderTips(){
+  V.innerHTML = `<div class="view">
+    <div class="eyebrow">Тәжірибе</div>
+    <h1 class="h-sec">Лайфхактар</h1>
+    <p class="sub">Емтиханды сәтті тапсыруға және жолда сенімді болуға көмектесетін қысқа да нақты кеңестер.</p>
+    <div class="tips-grid">
+      ${TIPS.map(([ic,c,bg,title,list])=>`<div class="card tip-card">
+        <div class="tip-head"><div class="tip-ic" style="background:${bg};color:${c}">${ic}</div><b>${title}</b></div>
+        <ul class="tip-list">${list.map((t,k)=>`<li><span class="n">${k+1}</span><span>${t}</span></li>`).join('')}</ul>
+      </div>`).join('')}
+    </div>
+    <div class="foot">Кеңестер жалпы тәжірибеге негізделген. Нақты ереже мен талаптар — ҚР ЖҚЕ ресми мәтінінде белгіленген.</div>
+  </div>`;
+}
+
+/* ============================================================
+   БАПТАУЛАР
+   ============================================================ */
+function renderSettings(){
+  const themeOpts=[['system','Жүйелік','Құрылғыға сай'],['light','Жарық','Ашық түс'],['dark','Түнгі','Қою түс']];
+  const examOpts=[['official','Ресми','40 сұрақ · 40 мин'],['short','Қысқа','20 сұрақ · 20 мин'],['quick','Жедел','10 сұрақ · 10 мин']];
+  const r=readiness();
+  const seen=Object.keys(PROG.signsSeen).length, read=Object.keys(PROG.lessonsRead).length;
+  V.innerHTML = `<div class="view"><div class="set-wrap">
+    <div class="eyebrow">Жеке параметрлер</div>
+    <h1 class="h-sec">Баптаулар</h1>
+    <p class="sub">Қолданбаны өзіңізге ыңғайлап реттеңіз. Барлық параметр осы құрылғыда сақталады.</p>
+
+    <div class="card set-card" style="margin-top:18px">
+      <h3>${IC.sun} Тақырып</h3>
+      <div class="desc">Интерфейс түсін таңдаңыз немесе құрылғы режиміне сәйкестендіріңіз.</div>
+      <div class="set-opts">${themeOpts.map(([v,l,d])=>`<button class="set-opt ${SETTINGS.theme===v?'on':''}" onclick="setTheme('${v}')">${l}<small>${d}</small></button>`).join('')}</div>
+    </div>
+
+    <div class="card set-card">
+      <h3>${IC.exam} Емтихан режимі</h3>
+      <div class="desc">Жаттығу үшін емтихан ұзақтығын өзгертуге болады. «Ресми» — нақты мемлекеттік емтихандай.</div>
+      <div class="set-opts">${examOpts.map(([v,l,d])=>`<button class="set-opt ${SETTINGS.examMode===v?'on':''}" onclick="setExamMode('${v}')">${l}<small>${d}</small></button>`).join('')}</div>
+    </div>
+
+    <div class="card set-card">
+      <h3>${IC.play} Анимация</h3>
+      <div class="set-row">
+        <div><b style="font-family:var(--fd);font-size:16.5px">Қозғалысты азайту</b><div class="desc" style="margin:2px 0 0">Анимация мен видеоның автоойнауын өшіреді (батареяны үнемдейді, шоғырлануды жеңілдетеді).</div></div>
+        <label class="switch"><input type="checkbox" ${SETTINGS.reduceMotion?'checked':''} onchange="setReduceMotion(this.checked)"><span class="sl"></span></label>
+      </div>
+    </div>
+
+    <div class="card set-card">
+      <h3>${IC.flag} Дайындық деректері</h3>
+      <div class="desc">Ағымдағы прогрес: дайындық <b>${r}%</b> · ${seen}/${SIGNS.length} белгі · ${read}/${LESSONS.length} модуль · емтихан үздігі ${PROG.examBest||0}/40 · ${PROG.examTries||0} әрекет.</div>
+      <button class="reset-btn" style="background:var(--red-soft);color:var(--red);font-size:14.5px;padding:9px 14px" onclick="resetProgress()">${IC.trash} Барлық прогресті тазалау</button>
+    </div>
+
+    <div class="foot">«Жол академиясы» · оқу тренажері · 2026. Параметрлер мен прогрес құрылғы жадында (localStorage) сақталады.</div>
+  </div></div>`;
+}
+
+/* ============================================================
    ІСКЕ ҚОСУ
    ============================================================ */
 /* ============================================================
@@ -1849,7 +2010,7 @@ function renderVideo(){
         <div class="vid-stage"><canvas id="vc_${L.id}" width="${VW}" height="${VH}"></canvas></div>
         <div class="vid-cap" id="vcap_${L.id}"></div>
         <div class="vid-ctrls">
-          <button class="btn btn-ghost btn-sm" id="vbtn_${L.id}" onclick="vToggle('${L.id}')">Кідірту</button>
+          <button class="btn btn-ghost btn-sm" id="vbtn_${L.id}" onclick="vToggle('${L.id}')">${SETTINGS.reduceMotion?'Ойнату':'Кідірту'}</button>
           <button class="btn btn-ghost btn-sm" onclick="vReplay('${L.id}')">Қайтадан</button>
         </div>
       </div>`).join('')}
@@ -1860,7 +2021,7 @@ function renderVideo(){
   VLESSONS.forEach(L=>{
     const cv=document.getElementById('vc_'+L.id), ctx=cv.getContext('2d');
     cv.width=VW*dpr; cv.height=VH*dpr; ctx.scale(dpr,dpr);
-    vAnim[L.id]={ctx, t:0, dur:L.dur, draw:L.draw, steps:L.steps, cap:document.getElementById('vcap_'+L.id), playing:true};
+    vAnim[L.id]={ctx, t:0, dur:L.dur, draw:L.draw, steps:L.steps, cap:document.getElementById('vcap_'+L.id), playing:!SETTINGS.reduceMotion};
   });
   vLast=0; vRAF=requestAnimationFrame(vLoop);
 }
@@ -1877,7 +2038,14 @@ function vLoop(ts){
 function vToggle(id){ const p=vAnim[id]; if(!p) return; p.playing=!p.playing; const b=document.getElementById('vbtn_'+id); if(b) b.textContent=p.playing?'Кідірту':'Ойнату'; }
 function vReplay(id){ const p=vAnim[id]; if(!p) return; p.t=0; p.playing=true; const b=document.getElementById('vbtn_'+id); if(b) b.textContent='Кідірту'; }
 
-applyTheme(Store.get('jol_theme') || ((window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) ? 'dark' : 'light'));
+applyTheme();
+applyExamMode();
+applyReduceMotion();
+if(window.matchMedia){
+  const mq = window.matchMedia('(prefers-color-scheme:dark)');
+  const onSysTheme = ()=>{ if(SETTINGS.theme==='system') applyTheme(); };
+  if(mq.addEventListener) mq.addEventListener('change', onSysTheme); else if(mq.addListener) mq.addListener(onSysTheme);
+}
 renderNav();
 renderHome();
 
