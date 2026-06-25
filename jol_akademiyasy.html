@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Жол академиясы — Қазақстан Республикасының жол қозғалысы ережелері (2026): теория, видеосабақтар, жол белгілері, қиылыс тренажері, тақырыптық тест пен емтихан симуляторы.">
+<meta name="theme-color" content="#14171B">
+<meta name="color-scheme" content="light dark">
+<title>ЖОЛ АКАДЕМИЯСЫ — ҚР жүргізуші теориясы мен практикасы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#14171B; --ink:#1A1E23; --paper:#E8EBEE; --surface:#FFFFFF;
+  --surface-2:#F3F5F8; --surface-3:#ECEFF3; --line:#D7DBE1; --lane:#C0C6CE;
+  --muted:#5C636B; --muted-2:#878E97;
+  --amber:#F2A900; --amber-deep:#CE8E00; --amber-soft:#FFF4DB;
+  --green:#1E9D55; --green-soft:#E3F5EA;
+  --red:#E0392F; --red-soft:#FBE7E5;
+  --blue:#1B5FB0; --blue-soft:#E6EEF8;
+  --radius:14px; --radius-sm:9px;
+  --shadow:0 1px 2px rgba(20,23,27,.05),0 8px 24px rgba(20,23,27,.06);
+  --shadow-lg:0 12px 40px rgba(20,23,27,.14);
+  --fd:'Barlow Condensed',system-ui,sans-serif;
+  --fb:'Barlow',system-ui,-apple-system,sans-serif;
+  --fm:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--paper);color:var(--ink);line-height:1.58;font-size:17px;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:var(--blue);text-decoration:none}
+::selection{background:var(--amber);color:#1A1E23}
+
+/* ---------- HEADER ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:var(--asphalt);color:#fff;
+  box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar-in{max-width:1120px;margin:0 auto;padding:13px 18px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-mark{width:38px;height:38px;border-radius:9px;flex:none;position:relative;
+  background:linear-gradient(150deg,#2A2F36,#191D22);display:grid;place-items:center;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.brand-mark svg{width:24px;height:24px}
+.brand-txt h1{font-family:var(--fd);font-weight:700;font-size:20px;letter-spacing:.04em;
+  line-height:1;text-transform:uppercase;white-space:nowrap}
+.brand-txt span{font-size:11px;letter-spacing:.14em;color:#9aa1ab;text-transform:uppercase;
+  font-weight:600}
+.mrp-pill{font-family:var(--fm);font-size:11.5px;font-weight:700;color:#1A1E23;
+  background:var(--amber);padding:5px 10px;border-radius:20px;white-space:nowrap;flex:none}
+.mrp-pill b{font-weight:700}
+.mrp-pill small{font-weight:500;font-size:9.5px;letter-spacing:.05em;display:block;
+  color:#5b4a00;text-transform:uppercase;line-height:1;margin-top:1px}
+/* animated lane line */
+.lane-strip{height:6px;background:var(--amber-deep);position:relative;overflow:hidden}
+.lane-strip::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 26px,#fff 26px 56px);
+  opacity:.85;animation:lane 1.4s linear infinite}
+@keyframes lane{to{transform:translateX(56px)}}
+@media (prefers-reduced-motion:reduce){.lane-strip::after{animation:none}}
+
+/* ---------- NAV ---------- */
+.nav{position:sticky;top:57px;z-index:40;background:var(--surface);
+  border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;
+  scrollbar-width:none;padding:0 8px}
+.nav-in::-webkit-scrollbar{display:none}
+.nav-btn{font-family:var(--fd);font-weight:600;font-size:17px;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--muted);padding:13px 15px 11px;white-space:nowrap;
+  border-bottom:3px solid transparent;transition:color .15s,border-color .15s;display:flex;
+  align-items:center;gap:7px}
+.nav-btn svg{width:17px;height:17px;opacity:.7}
+.nav-btn:hover{color:var(--ink)}
+.nav-btn.on{color:var(--ink);border-bottom-color:var(--amber)}
+.nav-btn.on svg{opacity:1;color:var(--amber-deep)}
+
+main{max-width:1120px;margin:0 auto;padding:22px 18px 90px}
+.view{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---------- SHARED ---------- */
+.eyebrow{font-family:var(--fd);font-weight:600;font-size:13px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--amber-deep);margin-bottom:6px}
+.h-sec{font-family:var(--fd);font-weight:700;font-size:33px;line-height:1.05;
+  letter-spacing:.01em;margin-bottom:4px}
+.sub{color:var(--muted);font-size:16.5px;max-width:62ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--fd);font-weight:600;font-size:17px;letter-spacing:.02em;
+  text-transform:uppercase;padding:12px 22px;border-radius:11px;transition:transform .1s,
+  box-shadow .15s,background .15s;user-select:none}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--amber);color:#1A1E23;box-shadow:0 4px 14px rgba(242,169,0,.35)}
+.btn-primary:hover{background:#FFB60C}
+.btn-dark{background:var(--asphalt);color:#fff}
+.btn-dark:hover{background:#23282E}
+.btn-ghost{background:var(--surface-2);color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{background:var(--surface-3)}
+.btn-sm{font-size:15.5px;padding:9px 17px}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;
+  padding:3px 9px;border-radius:20px;background:var(--surface-3);color:var(--muted);
+  letter-spacing:.02em}
+
+/* ---------- DASHBOARD ---------- */
+.hero{display:grid;grid-template-columns:1.25fr .85fr;gap:18px;margin-bottom:18px}
+.hero-main{padding:26px}
+.hero-main h2{font-family:var(--fd);font-weight:700;font-size:40px;line-height:1;
+  margin:8px 0 10px}
+.hero-main p{color:var(--muted);max-width:46ch;margin-bottom:18px}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
+.gauge-card{padding:22px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;background:
+  radial-gradient(120% 80% at 50% 0%,#fbfdff,var(--surface))}
+.gauge-wrap{position:relative;width:216px;max-width:100%;margin:6px auto 0}
+.gauge-val{position:absolute;left:0;right:0;bottom:26px;text-align:center}
+.gauge-val b{font-family:var(--fm);font-weight:700;font-size:46px;line-height:1;display:block}
+.gauge-val .pct{font-size:22px;font-weight:700;margin-left:1px}
+.gauge-status{font-family:var(--fd);font-weight:700;font-size:16.5px;text-transform:uppercase;
+  letter-spacing:.07em;margin-top:6px;line-height:1}
+.gauge-cap{font-size:14px;color:var(--muted);margin-top:7px;max-width:32ch;line-height:1.4}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat{padding:16px;text-align:left}
+.stat .n{font-family:var(--fm);font-weight:700;font-size:29px;line-height:1}
+.stat .l{font-size:13.5px;color:var(--muted);margin-top:3px;font-weight:500}
+.stat .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+  margin-bottom:10px}
+.stat .ic svg{width:17px;height:17px}
+
+/* news / updates */
+.news{padding:20px 22px;margin-bottom:18px;border-left:4px solid var(--amber);
+  background:linear-gradient(100deg,var(--amber-soft),var(--surface) 60%)}
+.news h3{font-family:var(--fd);font-weight:700;font-size:24px;display:flex;
+  align-items:center;gap:9px;margin-bottom:12px}
+.news h3 .live{font-family:var(--fb);font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  background:var(--red);color:#fff;padding:3px 8px;border-radius:5px;text-transform:uppercase}
+.news ul{list-style:none;display:grid;gap:10px}
+.news li{display:flex;gap:11px;font-size:16px}
+.news li b{color:var(--ink)}
+.news li .dot{width:7px;height:7px;border-radius:50%;background:var(--amber-deep);
+  margin-top:7px;flex:none}
+
+.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mod{padding:20px;display:flex;flex-direction:column;gap:10px;text-align:left;
+  align-items:flex-start;transition:transform .12s,box-shadow .15s,border-color .15s;
+  width:100%;cursor:pointer}
+.mod:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--lane)}
+.mod-ic{width:46px;height:46px;border-radius:11px;display:grid;place-items:center}
+.mod-ic svg{width:25px;height:25px}
+.mod h4{font-family:var(--fd);font-weight:700;font-size:22px;line-height:1.05}
+.mod p{font-size:15px;color:var(--muted);line-height:1.45}
+.mod .go{font-family:var(--fd);font-weight:600;font-size:14px;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--amber-deep);margin-top:auto;display:flex;align-items:center;
+  gap:6px}
+
+/* ---------- THEORY ---------- */
+.theory-grid{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start}
+.lesson-nav{position:sticky;top:118px;display:flex;flex-direction:column;gap:4px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:8px;box-shadow:var(--shadow)}
+.lesson-link{text-align:left;padding:11px 13px;border-radius:9px;font-weight:500;
+  font-size:15.5px;color:var(--muted);display:flex;gap:11px;align-items:center;
+  transition:background .12s,color .12s}
+.lesson-link:hover{background:var(--surface-2);color:var(--ink)}
+.lesson-link.on{background:var(--asphalt);color:#fff}
+.lesson-link .num{font-family:var(--fm);font-size:12.5px;font-weight:700;width:22px;flex:none;
+  color:var(--amber-deep)}
+.lesson-link.on .num{color:var(--amber)}
+.lesson-body{padding:30px 34px}
+.lesson-body h2{font-family:var(--fd);font-weight:700;font-size:30px;line-height:1.05;
+  margin-bottom:6px}
+.lesson-body .lead{color:var(--muted);font-size:16.5px;margin-bottom:20px;
+  padding-bottom:18px;border-bottom:1px dashed var(--lane)}
+.lesson-body h3{font-family:var(--fd);font-weight:700;font-size:22px;margin:24px 0 9px;
+  letter-spacing:.01em}
+.lesson-body p{margin-bottom:13px;font-size:17px}
+.lesson-body strong{color:var(--ink);font-weight:600}
+.callout{background:var(--blue-soft);border:1px solid #c8dbf2;border-radius:11px;
+  padding:15px 17px;margin:16px 0;font-size:15.5px;display:flex;gap:11px}
+.callout.warn{background:var(--amber-soft);border-color:#f0dca0}
+.callout.tip{background:var(--green-soft);border-color:#bfe6cd}
+.callout svg{width:20px;height:20px;flex:none;margin-top:1px}
+.callout b{display:block;margin-bottom:2px}
+/* speed table */
+.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;overflow:hidden;
+  border-radius:11px;border:1px solid var(--line)}
+.tbl th{background:var(--asphalt);color:#fff;font-family:var(--fd);font-weight:600;
+  font-size:14.5px;letter-spacing:.03em;text-align:left;padding:10px 13px;text-transform:uppercase}
+.tbl td{padding:10px 13px;border-top:1px solid var(--line)}
+.tbl tr:nth-child(even) td{background:var(--surface-2)}
+.tbl td.v{font-family:var(--fm);font-weight:700;color:var(--blue);white-space:nowrap}
+.lesson-foot{margin-top:26px;padding-top:18px;border-top:1px dashed var(--lane);
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+/* ---------- SIGNS ---------- */
+.sign-cats{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 20px}
+.sign-cat{font-family:var(--fd);font-weight:600;font-size:15.5px;text-transform:uppercase;
+  letter-spacing:.02em;padding:9px 15px;border-radius:24px;background:var(--surface);
+  border:1px solid var(--line);color:var(--muted);display:flex;align-items:center;gap:8px;
+  transition:all .13s}
+.sign-cat .sw{width:14px;height:14px;border-radius:4px;flex:none}
+.sign-cat:hover{border-color:var(--lane);color:var(--ink)}
+.sign-cat.on{background:var(--asphalt);color:#fff;border-color:var(--asphalt)}
+.signs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:16px}
+.sign-card{background:linear-gradient(180deg,#fff,#f7f9fb);border:1px solid var(--line);border-radius:15px;
+  padding:20px 16px;text-align:center;transition:transform .12s,box-shadow .15s,
+  border-color .15s;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px}
+.sign-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--lane)}
+.sign-card svg{width:96px;height:96px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.12))}
+.sign-card .code{font-family:var(--fm);font-size:11px;font-weight:700;color:var(--amber-deep)}
+.sign-card .nm{font-family:var(--fd);font-weight:600;font-size:16.5px;line-height:1.15}
+
+/* ---------- INTERSECTION ---------- */
+.xroad-wrap{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+.xroad-stage{padding:18px;text-align:center;position:relative}
+#xcanvas{width:100%;max-width:460px;height:auto;background:#243; border-radius:12px;
+  touch-action:manipulation;display:block;margin:0 auto;
+  background:#1b2025}
+.xroad-side{display:flex;flex-direction:column;gap:14px}
+.xroad-side .card{padding:18px}
+.xroad-q{font-family:var(--fd);font-weight:700;font-size:22px;line-height:1.1;margin-bottom:4px}
+.xroad-meta{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.order-chips{display:flex;flex-wrap:wrap;gap:8px;min-height:40px;margin-bottom:12px}
+.ochip{font-family:var(--fd);font-weight:700;font-size:15px;padding:7px 13px;border-radius:9px;
+  color:#fff;display:flex;align-items:center;gap:7px;animation:pop .25s}
+.ochip .seq{background:rgba(255,255,255,.28);width:20px;height:20px;border-radius:5px;
+  display:grid;place-items:center;font-size:12px}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.xroad-result{padding:13px 15px;border-radius:11px;font-size:14.5px;display:none;
+  margin-bottom:12px}
+.xroad-result.ok{background:var(--green-soft);border:1px solid #bfe6cd;display:block}
+.xroad-result.no{background:var(--red-soft);border:1px solid #f1c4c0;display:block}
+.xroad-result b{display:block;font-family:var(--fd);font-size:17px;margin-bottom:3px}
+.legend{display:flex;flex-direction:column;gap:9px;font-size:14px;color:var(--muted)}
+.legend .row{display:flex;align-items:center;gap:9px}
+.legend .car{width:22px;height:14px;border-radius:3px;flex:none}
+
+/* ---------- QUIZ / EXAM ---------- */
+.quiz-setup{max-width:760px;margin:0 auto}
+.topic-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0}
+.topic-card{padding:16px 18px;text-align:left;display:flex;align-items:center;gap:14px;
+  width:100%;transition:transform .12s,box-shadow .15s,border-color .15s;cursor:pointer}
+.topic-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--lane)}
+.topic-card .tn{width:42px;height:42px;border-radius:10px;background:var(--surface-2);
+  display:grid;place-items:center;font-family:var(--fd);font-weight:700;font-size:19px;
+  color:var(--amber-deep);flex:none}
+.topic-card .ti b{font-family:var(--fd);font-size:19px;font-weight:600;display:block;line-height:1.1}
+.topic-card .ti small{font-size:13.5px;color:var(--muted)}
+.topic-card .pass{margin-left:auto;font-size:12px;font-weight:700;color:var(--green);flex:none}
+
+.exam-banner{padding:22px 24px;display:flex;justify-content:space-between;gap:20px;
+  align-items:center;flex-wrap:wrap;background:linear-gradient(110deg,var(--asphalt),#23292f);
+  color:#fff;border:none}
+.exam-banner h3{font-family:var(--fd);font-weight:700;font-size:28px;margin-bottom:4px}
+.exam-banner p{color:#aeb4bd;font-size:15px;max-width:42ch}
+.exam-facts{display:flex;gap:22px;flex-wrap:wrap}
+.exam-fact b{font-family:var(--fm);font-size:24px;display:block;line-height:1;color:var(--amber)}
+.exam-fact span{font-size:11.5px;color:#9aa1ab;text-transform:uppercase;letter-spacing:.06em}
+
+/* runner */
+.runner{max-width:780px;margin:0 auto}
+.runner-top{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin-bottom:14px;flex-wrap:wrap}
+.qprog{flex:1;min-width:180px}
+.qprog .bar{height:8px;background:var(--surface-3);border-radius:10px;overflow:hidden}
+.qprog .fill{height:100%;background:var(--amber);transition:width .3s;border-radius:10px}
+.qprog .lab{font-size:12.5px;color:var(--muted);margin-top:5px;font-weight:500}
+.timer{font-family:var(--fm);font-weight:700;font-size:25px;padding:7px 15px;border-radius:10px;
+  background:var(--asphalt);color:#fff;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.timer.warn{background:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.7}}
+.timer svg{width:17px;height:17px;opacity:.8}
+.q-card{padding:26px 28px}
+.q-cat{font-family:var(--fd);font-weight:600;font-size:13px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--amber-deep);margin-bottom:8px}
+.q-text{font-size:20px;font-weight:500;line-height:1.42;margin-bottom:20px}
+.q-fig{display:block;margin:0 auto 18px;max-width:172px}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;padding:15px 17px;border-radius:11px;border:1.5px solid var(--line);
+  background:var(--surface);font-size:17px;display:flex;gap:13px;align-items:flex-start;
+  transition:border-color .12s,background .12s;line-height:1.4}
+.opt:hover{border-color:var(--lane);background:var(--surface-2)}
+.opt .key{width:28px;height:28px;border-radius:7px;background:var(--surface-3);flex:none;
+  display:grid;place-items:center;font-family:var(--fd);font-weight:700;font-size:16px;
+  transition:all .12s}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+.opt.sel .key{background:var(--blue);color:#fff}
+.opt.correct{border-color:var(--green);background:var(--green-soft)}
+.opt.correct .key{background:var(--green);color:#fff}
+.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.opt.wrong .key{background:var(--red);color:#fff}
+.opt[disabled]{cursor:default}
+.explain{margin-top:16px;padding:15px 17px;border-radius:11px;background:var(--surface-2);
+  border:1px dashed var(--lane);font-size:15.5px;display:none}
+.explain.show{display:block;animation:fade .3s}
+.explain b{font-family:var(--fd);font-size:15px;color:var(--amber-deep);
+  text-transform:uppercase;letter-spacing:.04em}
+.runner-foot{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+/* exam grid nav */
+.qnav{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;justify-content:center}
+.qnav button{width:34px;height:34px;border-radius:8px;font-family:var(--fm);font-weight:700;
+  font-size:13px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.qnav button.done{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
+.qnav button.cur{background:var(--asphalt);color:#fff;border-color:var(--asphalt)}
+.qnav button.flag{background:var(--amber-soft);border-color:var(--amber);color:var(--amber-deep)}
+
+/* result */
+.result{max-width:740px;margin:0 auto;text-align:center}
+.result-badge{width:120px;height:120px;border-radius:50%;margin:0 auto 18px;display:grid;
+  place-items:center;font-family:var(--fm);font-weight:700;font-size:38px;color:#fff}
+.result-badge.pass{background:radial-gradient(circle at 35% 30%,#34c172,#1a8a4a)}
+.result-badge.fail{background:radial-gradient(circle at 35% 30%,#ef5b52,#c12d24)}
+.result h2{font-family:var(--fd);font-weight:700;font-size:34px;margin-bottom:6px}
+.result .rsum{color:var(--muted);margin-bottom:20px}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.review-item{text-align:left;padding:16px 18px;margin-bottom:12px;border-left:4px solid var(--red)}
+.review-item.r-ok{border-left-color:var(--green)}
+.review-item .rq{font-weight:600;font-size:16px;margin-bottom:9px}
+.review-item .ra{font-size:15px;padding:5px 0;display:flex;gap:8px;align-items:flex-start}
+.review-item .ra.good{color:var(--green);font-weight:600}
+.review-item .ra.bad{color:var(--red);text-decoration:line-through;opacity:.8}
+.review-item .rex{font-size:13.5px;color:var(--muted);margin-top:8px;padding-top:8px;
+  border-top:1px dashed var(--lane)}
+
+/* ---------- FINES ---------- */
+.fine-note{padding:16px 18px;margin-bottom:16px;font-size:15px;display:flex;gap:11px;
+  background:var(--amber-soft);border:1px solid #f0dca0;border-radius:12px}
+.fine-note svg{width:20px;height:20px;flex:none;margin-top:1px;color:var(--amber-deep)}
+.fines-tbl{width:100%;border-collapse:collapse;font-size:15px;background:var(--surface);
+  border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+.fines-tbl th{background:var(--asphalt);color:#fff;font-family:var(--fd);font-weight:600;
+  text-align:left;padding:12px 15px;font-size:14.5px;letter-spacing:.02em;text-transform:uppercase}
+.fines-tbl td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}
+.fines-tbl tr:nth-child(even) td{background:var(--surface-2)}
+.fines-tbl .mrp{font-family:var(--fd);font-weight:700;color:var(--red);white-space:nowrap;
+  font-size:16px}
+.fines-tbl .tg{font-family:var(--fm);font-weight:500;font-size:12.5px;color:var(--muted);
+  white-space:nowrap}
+.fines-tbl .sev{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(20,23,27,.55);
+  backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex;animation:fade .2s}
+.modal-card{background:var(--surface);border-radius:18px;max-width:380px;width:100%;
+  padding:28px;text-align:center;box-shadow:var(--shadow-lg);animation:rise .25s}
+@keyframes rise{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+.modal-card svg.bigsign{width:134px;height:134px;margin:0 auto 16px;display:block;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.15))}
+.modal-card .code{font-family:var(--fm);font-weight:700;font-size:13px;color:var(--amber-deep);
+  margin-bottom:5px}
+.modal-card h3{font-family:var(--fd);font-weight:700;font-size:25px;line-height:1.1;
+  margin-bottom:10px}
+.modal-card p{font-size:15.5px;color:var(--muted);line-height:1.55}
+.modal-x{margin-top:20px;width:100%}
+
+/* footer */
+.foot{text-align:center;color:var(--muted-2);font-size:12.5px;margin-top:40px;
+  padding-top:20px;border-top:1px dashed var(--lane)}
+.foot b{color:var(--muted)}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .modules{grid-template-columns:1fr}
+  .theory-grid{grid-template-columns:1fr}
+  .lesson-nav{position:static;flex-direction:row;overflow-x:auto;flex-wrap:nowrap}
+  .lesson-link{white-space:nowrap}
+  .lesson-link .lt{display:none}
+  .xroad-wrap{grid-template-columns:1fr}
+  .topic-list{grid-template-columns:1fr}
+  .result-stats{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .brand-txt span{display:none}
+  .hero-main h2{font-size:32px}
+  .lesson-body{padding:22px 20px}
+  .q-card{padding:20px 18px}
+  .h-sec{font-size:25px}
+  .fines-tbl{font-size:12.5px}
+  .fines-tbl th,.fines-tbl td{padding:9px 10px}
+}
+/* ---------- VIDEO LESSONS ---------- */
+.vid-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:18px}
+.vid-card{padding:16px;display:flex;flex-direction:column;gap:11px}
+.vid-head b{font-family:var(--fd);font-weight:700;font-size:20px;display:block;line-height:1.12}
+.vid-head span{font-size:13.5px;color:var(--muted);display:block;margin-top:2px}
+.vid-stage{border-radius:12px;overflow:hidden;background:#1b2025;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.vid-stage canvas{width:100%;height:auto;display:block}
+.vid-cap{min-height:44px;font-size:14.5px;font-weight:500;line-height:1.35;background:var(--surface-2);
+  border:1px dashed var(--lane);border-radius:10px;padding:10px 13px;display:flex;align-items:center}
+.vid-ctrls{display:flex;gap:8px}
+.res-list{display:grid;gap:10px}
+.res-card{display:flex;align-items:center;gap:14px;padding:15px 17px;text-align:left;
+  transition:transform .12s,box-shadow .15s,border-color .15s}
+.res-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--lane)}
+.res-ic{width:42px;height:42px;border-radius:10px;background:var(--amber-soft);color:var(--amber-deep);
+  display:grid;place-items:center;flex:none}
+.res-ic svg{width:21px;height:21px}
+.res-tx{flex:1;min-width:0}
+.res-tx b{font-family:var(--fd);font-weight:600;font-size:17px;display:block;line-height:1.15}
+.res-tx span{font-size:13.5px;color:var(--muted)}
+.res-go{color:var(--muted-2);flex:none}
+.res-go svg{width:20px;height:20px}
+.vid-note{font-size:13px;color:var(--muted-2);margin-top:14px;display:flex;gap:8px;line-height:1.45}
+@media(max-width:880px){ .vid-grid{grid-template-columns:1fr} }
+
+/* ---------- THEME VARS / ENHANCEMENTS ---------- */
+:root{ --gauge-track:#E6EAEF; }
+body{transition:background .25s ease,color .25s ease}
+.card,.opt,.btn,.sign-card,.mod{transition:background .25s ease,border-color .25s ease,color .25s ease,transform .12s,box-shadow .15s}
+
+/* accessibility focus */
+:focus-visible{outline:2.5px solid var(--amber);outline-offset:2px;border-radius:6px}
+.nav-btn:focus-visible{outline-offset:-2px}
+
+/* header controls */
+.hdr-actions{display:flex;align-items:center;gap:10px;flex:none}
+.icon-btn{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;color:#cfd3d8;flex:none;
+  background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);transition:background .15s,color .15s}
+.icon-btn:hover{background:rgba(255,255,255,.15);color:#fff}
+.icon-btn:active{transform:translateY(1px)}
+.icon-btn svg{width:20px;height:20px}
+
+/* sign search + counts */
+.sign-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0 6px}
+.sign-search{flex:1;min-width:220px;position:relative}
+.sign-search input{width:100%;font-family:var(--fb);font-size:15.5px;padding:11px 16px 11px 42px;border-radius:24px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.sign-search input::placeholder{color:var(--muted-2)}
+.sign-search input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(242,169,0,.18)}
+.sign-search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted-2);pointer-events:none}
+.sign-cat .ct{font-family:var(--fm);font-size:11px;font-weight:700;opacity:.65;margin-left:2px}
+.sign-cat.on .ct{opacity:.9}
+.signs-empty{grid-column:1/-1;padding:44px 20px;text-align:center;color:var(--muted);font-size:15.5px}
+
+/* theory reading progress */
+.theory-prog{max-width:440px;margin:16px 0 2px}
+.lesson-link{justify-content:flex-start}
+.lesson-link .chk{margin-left:auto;width:17px;height:17px;flex:none;color:var(--green);opacity:0;transition:opacity .18s}
+.lesson-link.done .chk{opacity:1}
+.lesson-link.on .chk{color:#34c172}
+
+/* keyboard hint */
+.kbd-hint{font-size:12px;color:var(--muted-2);text-align:center;margin-top:12px;display:flex;gap:7px;
+  justify-content:center;flex-wrap:wrap;align-items:center}
+.kbd{font-family:var(--fm);font-size:11px;font-weight:700;background:var(--surface-3);border:1px solid var(--line);
+  border-bottom-width:2px;border-radius:5px;padding:2px 6px;color:var(--muted);min-width:18px;text-align:center}
+
+/* reset progress */
+.reset-row{display:flex;justify-content:flex-end;margin:-2px 0 14px}
+.reset-btn{font-size:13px;color:var(--muted-2);display:inline-flex;align-items:center;gap:6px;padding:7px 12px;
+  border-radius:9px;transition:color .15s,background .15s}
+.reset-btn:hover{color:var(--red);background:var(--red-soft)}
+.reset-btn svg{width:15px;height:15px}
+
+/* confirm dialog */
+.confirm-ic{width:64px;height:64px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;
+  background:var(--amber-soft);color:var(--amber-deep)}
+.confirm-ic svg{width:32px;height:32px}
+.confirm-btns{display:flex;gap:10px;margin-top:22px}
+.confirm-btns .btn{flex:1}
+
+/* ---------- DARK THEME ---------- */
+html[data-theme="dark"]{
+  --asphalt:#0E1216; --ink:#E8ECF1; --paper:#0E1115; --surface:#191E24;
+  --surface-2:#222931; --surface-3:#2B333C; --line:#2D363F; --lane:#3C4651;
+  --muted:#9BA4AE; --muted-2:#727B86;
+  --amber-soft:#3A2D0F; --green-soft:#103024; --red-soft:#3A1916; --blue-soft:#132843;
+  --gauge-track:#28323B;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.38);
+  --shadow-lg:0 16px 46px rgba(0,0,0,.55);
+}
+html[data-theme="dark"] body{background:radial-gradient(120% 90% at 50% -10%,#141a20,var(--paper))}
+html[data-theme="dark"] a{color:#5ea2ec}
+html[data-theme="dark"] .gauge-card{background:radial-gradient(120% 80% at 50% 0%,#212931,var(--surface))}
+html[data-theme="dark"] .sign-card{background:linear-gradient(180deg,#1e242b,#171c22)}
+html[data-theme="dark"] .news{background:linear-gradient(100deg,#2c2611,var(--surface) 62%)}
+html[data-theme="dark"] .callout{border-color:#234063}
+html[data-theme="dark"] .callout.warn{border-color:#5b4a1c}
+html[data-theme="dark"] .callout.tip{border-color:#1e4d36}
+html[data-theme="dark"] .fine-note{border-color:#5b4a1c}
+html[data-theme="dark"] .xroad-result.ok{border-color:#1e4d36}
+html[data-theme="dark"] .xroad-result.no{border-color:#5b2420}
+html[data-theme="dark"] .opt.correct{border-color:var(--green)}
+html[data-theme="dark"] .opt.wrong{border-color:var(--red)}
+html[data-theme="dark"] .opt.sel{border-color:var(--blue)}
+html[data-theme="dark"] .tbl td.v{color:#5ea2ec}
+html[data-theme="dark"] ::selection{background:var(--amber);color:#14171B}
+html[data-theme="dark"] .result-badge.pass{background:radial-gradient(circle at 35% 30%,#34c172,#157a40)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 17h14M7 17l1.2-5.5A2 2 0 0 1 10.15 10h3.7a2 2 0 0 1 1.95 1.5L17 17" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="17.5" r="1.4" fill="#fff"/><circle cx="16" cy="17.5" r="1.4" fill="#fff"/><path d="M11 6.5h2M12 4v5" stroke="#9aa1ab" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </div>
+      <div class="brand-txt">
+        <h1>Жол академиясы</h1>
+        <span>ҚР · Теория · Практика · 2026</span>
+      </div>
+    </div>
+    <div class="hdr-actions">
+      <div class="mrp-pill">1 АЕК = 4 325 ₸<small>2026 жыл</small></div>
+      <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Жарық/түнгі режим" title="Тақырыпты ауыстыру"></button>
+    </div>
+  </div>
+</header>
+<div class="lane-strip"></div>
+<nav class="nav"><div class="nav-in" id="nav"></div></nav>
+
+<main id="view"></main>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalCard"></div></div>
+
+<script>
+/* ============================================================
+   ЖОЛ АКАДЕМИЯСЫ — single-file trainer (vanilla JS)
+   Дереккөз: ҚР ЖҚЕ (№1196), ҚР ІІМ 2026 бұйрықтары, ӘҚБтК
+   ============================================================ */
+'use strict';
+
+/* ---- defensive storage: localStorage + in-memory fallback ---- */
+const Store = (() => {
+  const mem = {}; let ok = true;
+  try { const k='__t'; localStorage.setItem(k,'1'); localStorage.removeItem(k); }
+  catch(e){ ok = false; }
+  return {
+    get(k){ try { return ok ? JSON.parse(localStorage.getItem(k)) : (mem[k]??null); }
+            catch(e){ return mem[k]??null; } },
+    set(k,v){ try { if(ok) localStorage.setItem(k,JSON.stringify(v)); else mem[k]=v; }
+              catch(e){ mem[k]=v; } }
+  };
+})();
+
+const PROG = Store.get('jol_prog') || { signsSeen:{}, topicsBest:{}, examBest:0, examTries:0, examLog:[], lessonsRead:{} };
+if(!PROG.lessonsRead) PROG.lessonsRead = {};
+function saveProg(){ Store.set('jol_prog', PROG); }
+
+const MRP = 4325; // АЕК 2026
+const fmtTg = n => n.toLocaleString('ru-RU').replace(/,/g,' ') + ' ₸';
+
+/* ---- 2026 reform highlights ---- */
+const NEWS = [
+  ['Теория емтиханы — 40 сұрақ, 40 минут.', 'Өту үшін кемінде <b>32 дұрыс жауап</b> қажет. Жауапсыз қалған сұрақ қате болып есептеледі.'],
+  ['«Автомат / механика» шектеуі алынды.', '12.07.2026-дан бастап автоматпен емтихан тапсырған жүргізуші механикалық көлік те айдай алады.'],
+  ['Толық цифрландыру.', 'Даярлау «Автомектеп» жүйесі арқылы; куәлік <b>eGov mobile</b> цифрлық құжаттар сервисінде қолжетімді.'],
+  ['Автомектепсіз — куәлік жоқ.', 'Тек онлайн «оқыған» түлектерге куәлік берілмейді; топта 30-дан артық оқушы болмайды.'],
+  ['Практика — 9 жаттығу, шегі 95 балл.', 'Теорияны 3 рет тапсыруға мүмкіндік бар, нәтиже 2 жыл жарамды.']
+];
+
+/* ---- exam quick facts ---- */
+const EXAM = { q:40, min:40, pass:32, tries:3, valid:2 };
+
+/* ============================================================
+   ЖОЛ БЕЛГІЛЕРІ — inline SVG (viewBox 0 0 100 100)
+   ============================================================ */
+const SIGN_CATS = [
+  ['warn',    'Ескерту',        '#E0392F'],
+  ['priority','Басымдық',       '#F2A900'],
+  ['ban',     'Тыйым салу',     '#E0392F'],
+  ['order',   'Нұсқау',         '#1B5FB0'],
+  ['info',    'Ақпараттық',     '#1B5FB0'],
+  ['service', 'Сервис',         '#1B5FB0']
+];
+
+const SIGNS = [
+  // —— Ескерту ——
+  ['warn','1.1','Шлагбаумды теміржол өткелі','Алда шлагбауммен жабдықталған теміржол өткелі бар. Жылдамдықты бәсеңдетіп, шлагбаум мен бағдаршам сигналына дайын болыңыз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 7.5 92.5 82a6 6 0 0 1-5.2 9H12.7A6 6 0 0 1 7.5 82Z" fill="#FFFFFF" stroke="#D2202A" stroke-width="7" stroke-linejoin="round"/><rect x="24.5" y="41" width="7" height="26" rx="1.5" fill="#15181C"/><rect x="28" y="44" width="49" height="8.5" rx="2.5" fill="#15181C"/><g stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"><path d="M39 44l-6 8.5"/><path d="M51 44l-6 8.5"/><path d="M63 44l-6 8.5"/><path d="M75 44l-6 8.5"/></g></svg>`],
+  ['warn','1.20','Жаяу жүргіншілер өткелі','Алда белгіленген жаяу жүргіншілер өткелі бар — жылдамдықты бәсеңдетіп, өтіп бара жатқан адамдарға жол беруге дайын болыңыз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 7.5 92.5 82a6 6 0 0 1-5.2 9H12.7A6 6 0 0 1 7.5 82Z" fill="#FFFFFF" stroke="#D2202A" stroke-width="7" stroke-linejoin="round"/><g fill="#15181C"><circle cx="52" cy="29" r="5.4"/></g><g fill="none" stroke="#15181C" stroke-width="5.0" stroke-linecap="round" stroke-linejoin="round"><path d="M52 35 v14.0"/><path d="M52 39 l8.0 4.0"/><path d="M52 41 l-7.0 4.0"/><path d="M52 49.0 l7.0 13.0"/><path d="M52 49.0 l-6.0 14.0"/></g><g stroke="#15181C" stroke-width="3" stroke-linecap="round"><path d="M39 82h27"/><path d="M43 76h23"/></g></svg>`],
+  ['warn','1.21','Балалар','Алда балалар жиналуы мүмкін аумақ (мектеп, балабақша). Аса сақ болып, кенеттен жолға шығуы мүмкін екенін ескеріңіз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 7.5 92.5 82a6 6 0 0 1-5.2 9H12.7A6 6 0 0 1 7.5 82Z" fill="#FFFFFF" stroke="#D2202A" stroke-width="7" stroke-linejoin="round"/><g fill="#15181C"><circle cx="44" cy="30" r="4.968000000000001"/></g><g fill="none" stroke="#15181C" stroke-width="4.6000000000000005" stroke-linecap="round" stroke-linejoin="round"><path d="M44 36 v12.88"/><path d="M44 40 l7.36 3.68"/><path d="M44 42 l-6.44 3.68"/><path d="M44 48.88 l6.44 11.96"/><path d="M44 48.88 l-5.5200000000000005 12.88"/></g><g fill="#15181C"><circle cx="62" cy="33" r="4.212000000000001"/></g><g fill="none" stroke="#15181C" stroke-width="3.9000000000000004" stroke-linecap="round" stroke-linejoin="round"><path d="M62 39 v10.92"/><path d="M62 43 l6.24 3.12"/><path d="M62 45 l-5.46 3.12"/><path d="M62 49.92 l5.46 10.14"/><path d="M62 49.92 l-4.68 10.92"/></g></svg>`],
+  ['warn','1.8','Бағдаршаммен реттеу','Алда бағдаршаммен реттелетін қиылыс не өткел бар. Сигналға дайын болып, жылдамдықты бәсеңдетіңіз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 7.5 92.5 82a6 6 0 0 1-5.2 9H12.7A6 6 0 0 1 7.5 82Z" fill="#FFFFFF" stroke="#D2202A" stroke-width="7" stroke-linejoin="round"/><rect x="41" y="29" width="18" height="41" rx="6.5" fill="#15181C"/><circle cx="50" cy="39" r="4.2" fill="#E33B2E"/><circle cx="50" cy="50" r="4.2" fill="#F2A900"/><circle cx="50" cy="61" r="4.2" fill="#2BA24F"/></svg>`],
+  ['warn','1.11.1','Қауіпті бұрылыс (оңға)','Алда көру қашықтығы шектеулі қауіпті оңға бұрылыс. Жылдамдықты алдын ала төмендетіп, озуды доғарыңыз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 7.5 92.5 82a6 6 0 0 1-5.2 9H12.7A6 6 0 0 1 7.5 82Z" fill="#FFFFFF" stroke="#D2202A" stroke-width="7" stroke-linejoin="round"/><path d="M43 80 V54 Q43 43 56 43" fill="none" stroke="#15181C" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M52 35 70 43 52 51 Z" fill="#15181C"/></svg>`],
+  // —— Басымдық ——
+  ['priority','2.1','Басты жол','Сіз басты жолмен келе жатырсыз — реттелмеген қиылыстарда қосалқы жолдан шыққан көлікке қатысты басымдыққа иесіз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="rotate(45 50 50)"><rect x="16" y="16" width="68" height="68" rx="8" fill="#FFFFFF"/><rect x="24" y="24" width="52" height="52" rx="5" fill="#FFCB05"/></g></svg>`],
+  ['priority','2.2','Басты жолдың соңы','Басты жол басымдығы осы жерден аяқталады. Алдағы қиылыста басқа белгілерге не «оңнан кедергі» ережесіне сүйеніңіз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="rotate(45 50 50)"><rect x="16" y="16" width="68" height="68" rx="8" fill="#FFFFFF"/><rect x="24" y="24" width="52" height="52" rx="5" fill="#FFCB05"/></g><line x1="25" y1="75" x2="75" y2="25" stroke="#8A9097" stroke-width="7"/></svg>`],
+  ['priority','2.4','Жол беріңіз','Қиылысқа кіргенше басты жолмен келе жатқан көлік құралдарына жол беруге міндеттісіз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 90 91.5 18.5A6 6 0 0 0 86.3 9.5H13.7A6 6 0 0 0 8.5 18.5Z" fill="#FFFFFF" stroke="#D2202A" stroke-width="8" stroke-linejoin="round"/></svg>`],
+  ['priority','2.5','Тоқтамай жүруге болмайды','«STOP». Тоқтау сызығының (ол болмаса — қиылыс шетінің) алдында МІНДЕТТІ түрде толық тоқтап, содан соң жол беріп барып қозғаласыз.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="31,6 69,6 94,31 94,69 69,94 31,94 6,69 6,31" fill="#D2202A"/><polygon points="31,6 69,6 94,31 94,69 69,94 31,94 6,69 6,31" fill="none" stroke="#FFFFFF" stroke-width="3.5"/><text x="50" y="61" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="26" fill="#FFFFFF" letter-spacing="1">STOP</text></svg>`],
+  ['priority','2.3.1','Қосалқы жолдың қосылуы','Сіз басты жолмен жүрсіз; оңнан да, солдан да қосалқы жол қосылады. Олардан шыққан көлік сізге жол береді.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 7.5 92.5 82a6 6 0 0 1-5.2 9H12.7A6 6 0 0 1 7.5 82Z" fill="#FFFFFF" stroke="#D2202A" stroke-width="7" stroke-linejoin="round"/><rect x="46.5" y="31" width="7" height="46" fill="#15181C"/><rect x="29" y="48" width="42" height="5" fill="#15181C"/></svg>`],
+  // —— Тыйым салу ——
+  ['ban','3.1','Кіруге болмайды','«Кірпіш». Осы бағытта барлық көлік құралдарының кіруіне тыйым салынады (көбіне бір бағытты жолға қарсы шығуды бөгейді).',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#D2202A"/><rect x="22" y="43" width="56" height="14" rx="2" fill="#FFFFFF"/></svg>`],
+  ['ban','3.4','Жүк көлігіне тыйым','Жүк автомобильдерінің (рұқсат етілген ең үлкен салмағы тақтайшада көрсетілгеннен асатын) қозғалысына тыйым салынады.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FFFFFF" stroke="#D2202A" stroke-width="9"/><g fill="#15181C"><path d="M27 58V42h26v6h11l7 8v2H27z"/></g><circle cx="36" cy="62" r="5" fill="#15181C"/><circle cx="36" cy="62" r="2.2" fill="#FFFFFF"/><circle cx="60" cy="62" r="5" fill="#15181C"/><circle cx="60" cy="62" r="2.2" fill="#FFFFFF"/></svg>`],
+  ['ban','3.20','Озып кетуге тыйым','Барлық көлік құралдарын (жалғыз жүрген, жылдамдығы 30 км/сағ-тан төмен көліктерден басқа) озуға тыйым салынады.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FFFFFF" stroke="#D2202A" stroke-width="9"/><g><rect x="30" y="40" width="17" height="28" rx="3.06" fill="#E33B2E"/><rect x="32.72" y="45.04" width="11.56" height="7.28" rx="2" fill="#cfe0f0"/><rect x="32.72" y="55.68" width="11.56" height="6.16" rx="2" fill="#cfe0f0"/></g><g><rect x="54" y="38" width="17" height="28" rx="3.06" fill="#15181C"/><rect x="56.72" y="43.04" width="11.56" height="7.28" rx="2" fill="#cfe0f0"/><rect x="56.72" y="53.68" width="11.56" height="6.16" rx="2" fill="#cfe0f0"/></g></svg>`],
+  ['ban','3.24','Жылдамдықты шектеу','Көрсетілген жылдамдықтан (км/сағ) асып жүруге тыйым салынады. Белгі әсер ету аймағының соңына дейін қолданылады.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FFFFFF" stroke="#D2202A" stroke-width="9"/><text x="50" y="65" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="44" fill="#15181C">60</text></svg>`],
+  ['ban','3.27','Тоқтауға болмайды','Көлік құралдарының тоқтауына да, аялдауына да тыйым салынады (мәжбүрлі тоқтаудан басқа).',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="43" fill="#0E59A8"/><circle cx="50" cy="50" r="43" fill="none" stroke="#D2202A" stroke-width="9"/><path d="M31 31 69 69M69 31 31 69" stroke="#D2202A" stroke-width="7.5" stroke-linecap="round"/></svg>`],
+  ['ban','3.28','Аялдауға болмайды','Қысқа уақыт аялдауға (отырғызу-түсіруден ұзаққа) тыйым салынады; жолаушы түсіру не жүк тиеуге рұқсат.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="43" fill="#0E59A8"/><circle cx="50" cy="50" r="43" fill="none" stroke="#D2202A" stroke-width="9"/><path d="M31 69 69 31" stroke="#D2202A" stroke-width="7.5" stroke-linecap="round"/></svg>`],
+  ['ban','3.18.1','Оңға бұрылуға тыйым','Келесі қиылыста оңға бұрылуға тыйым салынады. Кері бұрылуға (разворот) тыйым салмайды.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FFFFFF" stroke="#D2202A" stroke-width="9"/><path d="M40 70 V56 Q40 47 50 47 H60 M60 47 L51 39 M60 47 L51 55" fill="none" stroke="#15181C" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 27 73 73" stroke="#D2202A" stroke-width="8" stroke-linecap="round"/></svg>`],
+  // —— Нұсқау ——
+  ['order','4.1.1','Тек тура жүру','Қозғалыс тек тура бағытта рұқсат етіледі. Қиылыстан кейін аула аумағына кіруге болады.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0E59A8"/><path d="M50 73 V34 M50 34 L38 48 M50 34 L62 48" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`],
+  ['order','4.1.2','Оңға қозғалыс','Қозғалыс тек оңға қарай рұқсат етіледі.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0E59A8"/><path d="M38 68 V52 Q38 44 46 44 H62 M62 44 L52 35 M62 44 L52 53" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`],
+  ['order','4.1.3','Солға қозғалыс','Қозғалыс тек солға қарай рұқсат етіледі.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0E59A8"/><path d="M62 68 V52 Q62 44 54 44 H38 M38 44 L48 35 M38 44 L48 53" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`],
+  ['order','4.3','Шеңбер бойымен қозғалыс','Қозғалыс шеңбер бойымен, көрсеткілер бағытында жүреді. ҚР-да шеңберге КІРЕТІН көлік шеңбердегіге жол береді.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0E59A8"/><g transform="rotate(0 50 50)"><path d="M50 24 A26 26 0 0 1 72 37" fill="none" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round"/><path d="M50 24 L44 19 L52 16 Z" fill="#FFFFFF"/></g><g transform="rotate(120 50 50)"><path d="M50 24 A26 26 0 0 1 72 37" fill="none" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round"/><path d="M50 24 L44 19 L52 16 Z" fill="#FFFFFF"/></g><g transform="rotate(240 50 50)"><path d="M50 24 A26 26 0 0 1 72 37" fill="none" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round"/><path d="M50 24 L44 19 L52 16 Z" fill="#FFFFFF"/></g></svg>`],
+  ['order','4.2.1','Кедергіні оң жақтан айналу','Бағыттаушы аралды, тұғырды не өзге кедергіні тек оң жағынан айналып өтуге рұқсат.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0E59A8"/><path d="M40 74 V50 Q40 38 54 38 H58 M58 38 L48 30 M58 38 L48 46" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`],
+  // —— Ақпараттық ——
+  ['info','5.16.1','Жаяу жүргіншілер өткелі','Жаяу жүргіншілер өткелінің орнын белгілейді. Осы тұста жаяу адамдар жүру бөлігін кесіп өтеді.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="7" fill="#0E59A8"/><polygon points="50,22 81,78 19,78" fill="#FFFFFF"/><g fill="#15181C"><circle cx="50" cy="37" r="4.428"/></g><g fill="none" stroke="#15181C" stroke-width="4.1" stroke-linecap="round" stroke-linejoin="round"><path d="M50 43 v11.479999999999999"/><path d="M50 47 l6.56 3.28"/><path d="M50 49 l-5.739999999999999 3.28"/><path d="M50 54.48 l5.739999999999999 10.66"/><path d="M50 54.48 l-4.92 11.479999999999999"/></g></svg>`],
+  ['info','5.5','Бір бағытты жол','Осы жолда барлық көлік бір бағытта жүреді. Қарсы қозғалыс жоқ.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="7" fill="#0E59A8"/><path d="M50 76 V32 M50 32 L40 44 M50 32 L60 44" fill="none" stroke="#FFFFFF" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`],
+  ['info','6.4','Тұрақ','Көлік қоюға рұқсат етілген орын. Қосымша тақтайшалар тұрақ тәртібі мен шегін нақтылайды.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="7" fill="#0E59A8"/><text x="50" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="62" fill="#FFFFFF">P</text></svg>`],
+  // —— Сервис ——
+  ['service','7.3','Жанармай құю станциясы','Алда жанармай құю станциясы бар. Тақтайшада дейінгі қашықтық көрсетіледі.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="7" fill="#0E59A8"/><rect x="20" y="18" width="60" height="64" rx="6" fill="#FFFFFF"/><rect x="33" y="32" width="22" height="40" rx="3" fill="none" stroke="#15181C" stroke-width="4.5"/><rect x="33" y="32" width="22" height="13" fill="#15181C"/><path d="M55 42h8q4 0 4 5v13q0 4 4 4" fill="none" stroke="#15181C" stroke-width="4.5"/><circle cx="71" cy="38" r="3.6" fill="#15181C"/></svg>`],
+  ['service','7.1','Алғашқы медициналық көмек','Алда жедел медициналық көмек пункті бар.',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="7" fill="#0E59A8"/><rect x="20" y="18" width="60" height="64" rx="6" fill="#FFFFFF"/><rect x="44" y="30" width="12" height="40" fill="#D2202A"/><rect x="30" y="44" width="40" height="12" fill="#D2202A"/></svg>`],
+];
+
+/* ============================================================
+   ТЕОРИЯ — 10 модуль (ҚР ЖҚЕ негізінде)
+   ============================================================ */
+const LESSONS = [
+{ num:'01', title:'Жалпы ережелер және ұғымдар',
+  lead:'Жол қозғалысының тілін меңгерудің бастауы — терминдер. Олардың дәл мағынасын білмей, кейінгі ережелерді дұрыс түсіну мүмкін емес.',
+  html:`
+  <p>Қазақстан Республикасының Жол қозғалысы ережелері (ЖҚЕ) — жолдағы барлық қатысушыға: жүргізушіге, жаяу жүргіншіге, жолаушыға бірдей міндетті құжат. Ереже мемлекеттік жолда да, аула аумағында да, кез келген меншік нысанындағы жолда да қолданылады.</p>
+  <h3>Маңызды терминдер</h3>
+  <p><strong>Жол</strong> — көлік қозғалысына арналған жолақ, оған жүру бөлігі, трамвай жолы, бөлу жолағы, тротуар мен жол жиегі кіреді. <strong>Жүру бөлігі</strong> — тек көлік құралдарының жүруіне арналған бөлік. <strong>Бөлу жолағы</strong> — қарама-қарсы ағындарды бөліп тұратын конструкциялық элемент; ол көлік немесе жаяу жүрісіне арналмаған.</p>
+  <p><strong>Қиылыс</strong> — бір деңгейде қиылысатын, түйісетін немесе тармақталатын жолдар алаңы. <strong>Елді мекен</strong> — кіреберісі мен шығаберісі 5.22–5.25 белгілерімен белгіленген, құрылыс салынған аумақ (бұл — жылдамдық режимін анықтайтын негізгі ұғым).</p>
+  <div class="callout"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1B5FB0" stroke-width="1.7"/><path d="M12 8h.01M11 12h1v4h1" stroke="#1B5FB0" stroke-width="1.7" stroke-linecap="round"/></svg><div><b>Басымдық пен кедергі</b>«Басымдық» — өзге қатысушыға қатысты бірінші жүру құқығы. «Қозғалысқа кедергі» — сол бағытты, сол жылдамдықты сақтап жүруді жалғастыру өзге көлікті жылдамдығын не бағытын өзгертуге мәжбүрлейтін жағдай.</div></div>
+  <p><strong>Жаяу жүргінші</strong> — жолда көлік құралынан тыс жүрген адам. Велосипед, мопед, мотоциклді жетелеп бара жатқан адам да жаяу жүргіншіге теңестіріледі. <strong>Көлік құралы</strong> — адамды, жүкті немесе жабдықты тасуға арналған құрылғы.</p>`
+},
+{ num:'02', title:'Жүргізуші міндеттері мен құжаттар',
+  lead:'Рөлге отырар алдында қандай құжат қажет, жолда не міндетті — мұны 2026 жылғы цифрлық реформа едәуір өзгертті.',
+  html:`
+  <h3>Қажетті құжаттар (2026)</h3>
+  <p>Жүргізуші өзімен бірге ұстауға (немесе цифрлық түрде көрсетуге) тиіс: тиісті санаттағы <strong>жүргізуші куәлігі</strong>, көлікті <strong>тіркеу туралы куәлік</strong> және <strong>міндетті сақтандыру</strong> (ОСАГО) полисі.</p>
+  <div class="callout tip"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1E9D55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Жаңалық: цифрлық куәлік</b>Жүргізуші куәлігі енді <strong>eGov mobile</strong> қосымшасындағы «Цифрлық құжаттар» сервисі арқылы қолжетімді — пластик картаны әрдайым алып жүру міндетті емес. Куәлікте беріліс қорабының түрі (автомат/механика) туралы белгі алынып тасталды.</div></div>
+  <h3>Жолдағы негізгі міндеттер</h3>
+  <p>Қозғалыс алдында белдікті тағу (және барлық жолаушының тағуын қамтамасыз ету) — міндетті. Күндіз қала ішінде де <strong>жақын жарық немесе күндізгі жүру шамдары</strong> қосулы болуы тиіс. Мас күйде (алкоголь, есірткі) немесе шаршаған, ауру күйде көлік басқаруға қатаң тыйым салынады.</p>
+  <p>Жүргізуші көлік ақаусыз екеніне көз жеткізуі керек. <strong>Тежегіш жүйесі, рульдік басқару немесе фаралары ақаулы</strong> көлікпен жүруге болмайды. Полиция қызметкері тоқтатуды талап етсе, тоқтау міндетті.</p>`
+},
+{ num:'03', title:'Жол белгілерінің 6 тобы',
+  lead:'Әр топтың пішіні мен түсі — оның мағынасының кілті. Түрін бір қарағаннан тану — емтиханда да, жолда да басты дағды.',
+  html:`
+  <p>ҚР-да жол белгілері ҚР СТ 1125-2021 стандартына және «Жол белгілері мен сигналдары туралы» Вена конвенциясына сай. Барлығы 7 топқа бөлінеді (соңғысы — тақтайшалар).</p>
+  <table class="tbl"><tr><th>Топ</th><th>Пішіні / түсі</th><th>Қызметі</th></tr>
+  <tr><td><strong>Ескерту</strong></td><td>Ақ үшбұрыш, қызыл жиек</td><td>Алдағы қауіп туралы хабарлайды</td></tr>
+  <tr><td><strong>Басымдық</strong></td><td>Әр түрлі (ромб, кері үшбұрыш, сегізбұрыш)</td><td>Қиылыста кім бірінші жүретінін реттейді</td></tr>
+  <tr><td><strong>Тыйым салу</strong></td><td>Қызыл шеңбер</td><td>Белгілі бір әрекетке тыйым салады</td></tr>
+  <tr><td><strong>Нұсқау</strong></td><td>Көк дөңгелек</td><td>Міндетті бағыт/әрекетті көрсетеді</td></tr>
+  <tr><td><strong>Ақпараттық</strong></td><td>Көк тікбұрыш</td><td>Режим, бағыт, нысан орнын хабарлайды</td></tr>
+  <tr><td><strong>Сервис</strong></td><td>Көк тікбұрыш, ақ алаң</td><td>ЖҚС, аурухана, тұрақ т.б. көрсетеді</td></tr></table>
+  <div class="callout warn"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3z" stroke="#CE8E00" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#CE8E00" stroke-width="1.8" stroke-linecap="round"/></svg><div><b>Есте сақтаңыз</b>Қызыл шеңбер — <strong>тыйым</strong>, көк дөңгелек — <strong>міндеттеме</strong>. «Белгілер» бөлімінде әр белгіні басып, мағынасын жаттай аласыз.</div></div>`
+},
+{ num:'04', title:'Жол таңбалары',
+  lead:'Асфальттағы сызықтар — үнсіз, бірақ заңды бұйрық. Тұтас пен үзік сызықтың айырмашылығы — қателіктің ең жиі көзі.',
+  html:`
+  <h3>Көлденең таңбалар</h3>
+  <p><strong>1.1 — тұтас сызық.</strong> Қарама-қарсы ағындарды немесе жүру бөлігінің шетін бөледі. Оны <strong>кесіп өтуге тыйым салынады</strong> (озу да, бұрылу да жоқ).</p>
+  <p><strong>1.5 — үзік сызық.</strong> Қарама-қарсы ағындарды бөледі немесе жолақтарды белгілейді. Кесіп өтуге болады (озуға, қатар ауыстыруға рұқсат). Штрихтер арасы — қашықтыққа тең.</p>
+  <p><strong>1.3 — қос тұтас.</strong> Үш және одан көп жолақты жолда қарсы ағындарды бөледі; кесуге қатаң тыйым.</p>
+  <p><strong>1.12 — «стоп-сызық».</strong> Бағдаршамның тыйым сигналында немесе 2.5 (STOP) белгісінде тоқтайтын орынды көрсетеді.</p>
+  <h3>Маңызды белгілеулер</h3>
+  <p><strong>1.14.1/1.14.2 — «зебра».</strong> Жаяу жүргіншілер өткелі. <strong>1.2</strong> — жүру бөлігінің шетін белгілейтін тұтас жиек сызығы. <strong>1.16.1</strong> — ағындар бөлінетін/қосылатын бағыттаушы арал.</p>
+  <div class="callout"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h4M12 12h4M20 12h0" stroke="#1B5FB0" stroke-width="2" stroke-linecap="round"/></svg><div><b>Қарама-қайшылық туса</b>Уақытша таңбалар (сары) тұрақты таңбадан (ақ) басым. Ал жалпы алғанда <strong>жол белгісінің талабы таңбадан жоғары</strong> тұрады.</div></div>`
+},
+{ num:'05', title:'Бағдаршам және реттеуші',
+  lead:'Қиылыстағы билік иерархиясының басында — адам. Реттеуші мен бағдаршам бірге тұрса, реттеушінің ишараты басым.',
+  html:`
+  <h3>Бағдаршам сигналдары</h3>
+  <p><strong>Қызыл</strong> (соның ішінде қызыл+сары) — қозғалысқа тыйым. <strong>Жасыл</strong> — рұқсат. <strong>Жыпылықтаған жасыл</strong> — рұқсат әлі бар, бірақ көп ұзамай тыйым сигналы жанады. <strong>Сары</strong> — тыйым, бірақ қауіпсіз тоқтай алмайтын жүргізушіге қозғалысты аяқтауға рұқсат. <strong>Жыпылықтаған сары</strong> — қиылыс реттелмейді, сақтықпен өтіңіз.</p>
+  <p>Негізгі сигнал жанындағы <strong>қосымша секциядағы көрсеткі</strong> тек сол бағытқа рұқсат береді. Жасыл негізгі сигнал жанбай тұрып қосымша көрсеткі жанса — басымдық берілмейді, өзгелерге жол беру керек.</p>
+  <h3>Реттеушінің ишараттары</h3>
+  <p><strong>Қолдары жанына түсірілген немесе бір қолы алға созылған:</strong> кеудесі мен арқасы жағынан — тыйым; бүйірі (бок) жағынан — тура мен оңға рұқсат. <strong>Қол жоғары көтерілген:</strong> барлық бағытқа тыйым (сары сигналға ұқсас). <strong>Оң қол алға созылған:</strong> кеуде жағынан — оңға бұрылуға не тура жүруге рұқсат.</p>
+  <div class="callout"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1B5FB0" stroke-width="1.7"/><path d="M12 7v6l4 2" stroke="#1B5FB0" stroke-width="1.7" stroke-linecap="round"/></svg><div><b>Иерархия</b>Реттеуші → бағдаршам → басымдық белгілері → таңбалар. Жоғары тұрған билік төмендегінің талабын жояды.</div></div>`
+},
+{ num:'06', title:'Қозғалыс басымдылығы — қиылыстар',
+  lead:'Емтиханда ең көп қателесетін бөлім. Бірақ логикасы қарапайым: алдымен жолдың түрін, сосын белгіні, сосын «оңды» қараңыз.',
+  html:`
+  <h3>Реттелмейтін қиылыстар</h3>
+  <p><strong>Тең жолдар (екеуі де асфальт не екеуі де топырақ).</strong> Бұл жерде «<strong>оңнан кедергі</strong>» ережесі: оң жағыңнан келе жатқан көлікке жол бересіз. Бұл — велосипедшіге де, кез келген көлікке де қатысты әмбебап ереже.</p>
+  <p><strong>Басты және қосалқы жол.</strong> Басты жолда (2.1 белгісі немесе асфальт vs топырақ) келе жатқан көлік басым. Қосалқы жолдан (2.4 «Жол беріңіз» немесе 2.5 «STOP») шыққан көлік жол береді.</p>
+  <h3>Бұрылыс кезіндегі ереже</h3>
+  <p>Тура және оңға жүру — солға бұрылудан басым. Сол себепті <strong>солға немесе кері бұрылғанда қарсыдан тура/оңға келе жатқан көлікке жол беруге</strong> міндеттісіз.</p>
+  <div class="callout tip"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1E9D55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Шеңберлі қиылыс</b>4.3 белгісімен белгіленген шеңберде <strong>шеңберге кіретін көлік ішіндегіге жол береді</strong> (2017 ж. реформадан бері). Бұл — бүгінгі ҚР-дағы әдепкі ереже.</div></div>
+  <p><strong>Трамвай.</strong> Тең жағдайда (бағдаршам жасыл, басымдық тең) рельссіз көлікке қарағанда трамвай басым — қай бағытқа барса да.</p>
+  <p>«Қиылыс» бөліміндегі тренажерде осы ережелерді нақты сахналарда жаттығасыз.</p>`
+},
+{ num:'07', title:'Жылдамдық режимі',
+  lead:'Жылдамдық — апаттың ауырлығын анықтайтын басты фактор. ҚР-дағы шектеулерді жатқа білу — емтиханның тұрақты сұрағы.',
+  html:`
+  <p>Жүргізуші белгіленген шектен аспайтын, әрі көрінуді, ауа райын, жол мен жүк жағдайын ескеретін жылдамдықпен жүруге тиіс. Төмендегі мәндер — белгімен өзгертілмеген әдепкі шектеулер:</p>
+  <table class="tbl"><tr><th>Жағдай</th><th>Жеңіл авто / мотоцикл</th></tr>
+  <tr><td>Тұрғын аймақ, аула аумағы</td><td class="v">20 км/сағ</td></tr>
+  <tr><td>Елді мекен ішінде</td><td class="v">60 км/сағ</td></tr>
+  <tr><td>Елді мекеннен тыс (қалған жолдар)</td><td class="v">100 км/сағ</td></tr>
+  <tr><td>Бөлу жолағы бар жол</td><td class="v">110 км/сағ</td></tr>
+  <tr><td>Автомагистраль (3.24 белгісімен)</td><td class="v">140 км/сағ</td></tr></table>
+  <p>Жүк автомобильдері (3,5 т-дан асатын), автобустар үшін шектеулер төмен: елді мекеннен тыс — әдетте 90 км/сағ, автомагистральда — 110 км/сағ. <strong>Кузовта адам тасығанда</strong> жылдамдық 60 км/сағ-тан аспауы тиіс.</p>
+  <div class="callout warn"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3z" stroke="#CE8E00" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#CE8E00" stroke-width="1.8" stroke-linecap="round"/></svg><div><b>Орташа жылдамдық бақылауы</b>Трассалардағы екі камера аралығындағы орташа жылдамдық та өлшенеді. 60 км/сағ-тан асырғаны үшін айыппұл — 40 АЕК (173 000 ₸).</div></div>`
+},
+{ num:'08', title:'Тоқтау, аялдау, тұрақ',
+  lead:'Үш ұғымның айырмашылығын ажырату — айыппұлдан құтылудың кепілі. Қайда болмайтынын білу одан да маңызды.',
+  html:`
+  <p><strong>Тоқтау</strong> — отырғызу/түсіру немесе жүк үшін 5 минутқа дейін көлікті қозғалыссыз қалдыру. <strong>Аялдау</strong> — 5 минуттан ұзақ тоқтату (бұл уақыт отырғызу-түсіруге қажет болмаса). Тұрақ — соның ұзаққа созылған түрі.</p>
+  <h3>Тоқтауға тыйым салынатын жерлер</h3>
+  <p>Трамвай жолында; теміржол өткелінде; жаяу жүргіншілер өткелінде және оған дейінгі 5 м-де; қиылыстарда және қиылыс шетінен 5 м жақын жерде; жүру бөлігі тарылып, өзге көлікке кедергі болатын тұста; көпір, эстакада, тоннельде.</p>
+  <p><strong>Аялдамаға</strong> қатысты: маршруттық көлік аялдамасынан (5.x белгісі) <strong>15 м жақын</strong> жерде аялдауға болмайды (жолаушы отырғызудан басқа).</p>
+  <div class="callout"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1B5FB0" stroke-width="1.7"/><path d="M9 9l6 6M15 9l-6 6" stroke="#1B5FB0" stroke-width="1.7" stroke-linecap="round"/></svg><div><b>Белгімен ажырату</b>3.27 — тоқтауға да, аялдауға да тыйым (көк дөңгелек, қызыл айқыш). 3.28 — тек аялдауға тыйым (бір қызыл сызық); қысқа тоқтауға болады.</div></div>`
+},
+{ num:'09', title:'Маневрлеу: бұрылу, артқа жүру, озу',
+  lead:'Маневр — ниетіңізді алдын ала білдіру өнері. Көрсеткіш беру мен дұрыс орын алу — әр маневрдің негізі.',
+  html:`
+  <h3>Бұрылу мен қатар ауыстыру</h3>
+  <p>Кез келген маневрден бұрын тиісті бағыттың <strong>көрсеткішін (бұрылыс шамын) алдын ала қосу</strong> керек, бірақ ол өзгеге артықшылық бермейді. Оңға бұрылар алдында оң жақ шеткі орынды, солға бұрылар алдында сол жақ шеткі орынды (немесе екі жақты жолда ортаға жақын) аласыз.</p>
+  <p>Қатар ауыстырғанда сол бағытта, өзгермей келе жатқан көлікке жол бересіз. Екі көлік бір мезетте қатар ауыстырса — «оңнан кедергі» қолданылады.</p>
+  <h3>Артқа жүру</h3>
+  <p>Қауіпсіз әрі өзгеге кедергісіз болғанда ғана рұқсат. <strong>Қиылыстарда</strong>, сондай-ақ жаяу жүргіншілер өткелінде, көпір, тоннель, теміржол өткелі мен аялдамаларда артқа жүруге <strong>тыйым салынады</strong>.</p>
+  <h3>Озу</h3>
+  <p>Озу — қарсы ағынға шығатын маневр, сондықтан ерекше қауіпті. Озар алдында қарсы жолақ бос әрі озуды қауіпсіз аяқтай алатыныңызға көз жеткізіңіз. <strong>Тұтас сызық (1.1/1.3), 3.20 белгісі, қиылыс, өткел, көпір, теміржол өткелі мен оның алдындағы 100 м</strong> аймағында озуға болмайды.</p>
+  <div class="callout warn"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3z" stroke="#CE8E00" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#CE8E00" stroke-width="1.8" stroke-linecap="round"/></svg><div><b>Қарсы жолаққа шығу</b>Тұтас сызықты кесіп қарсы жолаққа шығу — ауыр бұзушылық; қайталанса жүргізуші куәлігінен айыруға дейін баруы мүмкін.</div></div>`
+},
+{ num:'10', title:'Қауіпсіздік және алғашқы көмек',
+  lead:'Ереженің түпкі мақсаты — өмірді сақтау. Бұл бөлім емтиханда заң мен медицина сұрақтары арқылы тексеріледі.',
+  html:`
+  <h3>Пассив қауіпсіздік</h3>
+  <p>Қауіпсіздік белдігі — соқтығыс кезінде өмір сақтаудың №1 құралы. <strong>7 жасқа дейінгі балаларды</strong> арнайы ұстау құрылғысында (балалар орындығы) тасу міндетті. Түнде немесе көрінуі нашар жағдайда елді мекеннен тыс жүрген жаяу жүргіншіге <strong>жарық шағылыстыратын элемент</strong> тағу міндетті.</p>
+  <h3>Жүргізуші жағдайы</h3>
+  <p>Шаршау мен ұйқысыздық алкогольмен бірдей қауіпті — реакцияны баяулатады. Ұзақ сапарда әр 2–3 сағат сайын демалу қажет.</p>
+  <h3>ЖКО болғанда</h3>
+  <p>Дереу тоқтап, <strong>авариялық сигналды</strong> қосыңыз және авариялық тоқтау белгісін қойыңыз: елді мекенде — кемінде <strong>15 м</strong>, одан тыс — кемінде <strong>30 м</strong> қашықтықта. Жәбірленушіге дәрігерге дейінгі көмек көрсетіңіз, <strong>103</strong> (жедел жәрдем) немесе <strong>112</strong> нөміріне хабарласыңыз. Оқиға орнын өзгертпеңіз.</p>
+  <div class="callout tip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" stroke="#1E9D55" stroke-width="1.8" stroke-linejoin="round"/></svg><div><b>Алғашқы көмек ретімен</b>Қауіпсіздікті қамтамасыз ету → тыныс жолын тексеру → қан кетуді тоқтату → жылылау мен жайғастыру. Жәбірленушіні қажетсіз қозғалтпаған абзал.</div></div>`
+}
+];
+
+/* ============================================================
+   ТЕСТ БАНКІ — 50 сұрақ (ҚР ЖҚЕ + ӘҚБтК)
+   t=тақырып, fig=белгі коды, a=дұрыс жауап индексі, ex=түсіндірме
+   ============================================================ */
+const QUESTIONS = [
+{t:"Жалпы ережелер",q:"Елді мекеннің басталуы мен аяқталуы қай белгілермен анықталады?",o:["5.22–5.25 белгілерімен","Жол шетіндегі бордюрмен","Жарықтандыру бағаналарымен","Бағдаршамдардың болуымен"],a:0,ex:"5.22–5.25 ақ түсті белгілер елді мекен шекарасын белгілейді әрі әдепкі жылдамдық режимін айқындайды."},
+{t:"Жалпы ережелер",q:"«Қозғалысқа кедергі» дегеніміз не?",o:["Жолдағы шұңқыр не кедір-бұдыр","Бағдаршамның сары сигналы","Сол бағыт пен жылдамдықты сақтап жүруді жалғастыру өзгені бағытын не жылдамдығын өзгертуге мәжбүрлейтін жағдай","Жаяу жүргінші тротуарда тұрған сәт"],a:2,ex:"Кедергі — өз жүрісіңізді жалғастыру басқа қатысушыны маневр жасауға мәжбүрлейтін ахуал. Дәл осыдан «жол беру» міндеті туады."},
+{t:"Жалпы ережелер",q:"ҚР Жол қозғалысы ережелері кімге міндетті?",o:["Тек жүргізушілерге","Тек кәсіби жүргізушілерге","Жолдағы барлық қатысушыға: жүргізуші, жаяу жүргінші, жолаушыға","Тек елді мекен ішінде жүргендерге"],a:2,ex:"Ереже барлық қатысушыға және меншік нысанына қарамастан кез келген жолға қолданылады."},
+{t:"Жалпы ережелер",q:"2026 жылдан бастап цифрлық жүргізуші куәлігі қайдан қолжетімді?",o:["Тек пластик карта түрінде","eGov mobile «Цифрлық құжаттар» сервисінде","Әлеуметтік желілерде","Көлік тіркеу куәлігінде"],a:1,ex:"Реформа бойынша куәлік eGov mobile қосымшасында цифрлық түрде көрсетіледі; пластикті үнемі алып жүру міндетті емес."},
+{t:"Жалпы ережелер",q:"2026 жылғы өзгеріске сай куәлікте беріліс қорабының (автомат/механика) түрі көрсетіле ме?",o:["Иә, әрқашан","Жоқ, бұл белгі алынып тасталды","Тек жүк көлігі үшін","Тек шетелдік куәлікте"],a:1,ex:"12.07.2026-дан автомат/механика шектеуі жойылды — белгі куәліктен алынды, автоматпен оқыған механиканы да айдай алады."},
+
+{t:"Жол белгілері",q:"Кері (төңкерілген) үшбұрышты «Жол беріңіз» белгісі нені талап етеді?",fig:"2.4",o:["Міндетті түрде тоқтауды","Қиылысқа дейін басты жолдағы көлікке жол беруді","Жылдамдықты арттыруды","Тек оңға бұрылуды"],a:1,ex:"2.4 толық тоқтауды талап етпейді, бірақ қиылысқа кіргенше басты жолдағыларға жол беру міндетті."},
+{t:"Жол белгілері",q:"Сегізбұрышты «STOP» белгісі нені талап етеді?",fig:"2.5",o:["Жылдамдықты бәсеңдетуді ғана","Тоқтау сызығының алдында толық тоқтап барып жол беруді","Тек түнде тоқтауды","Бұрылуға тыйымды"],a:1,ex:"2.5 — тоқтау сызығының (ол болмаса қиылыс шетінің) алдында МІНДЕТТІ толық тоқтауды, содан соң жол беруді талап етеді."},
+{t:"Жол белгілері",q:"Қызыл шеңбер ішіндегі ақ көлденең жолақ («кірпіш») нені білдіреді?",fig:"3.1",o:["Жол жөнделіп жатыр","Барлық көлікке осы бағытта кіруге тыйым","Тек жүк көлігіне тыйым","Тұраққа кіру"],a:1,ex:"3.1 «Кіруге болмайды» — көбіне бір бағытты жолға қарсы шығуды бөгейді."},
+{t:"Жол белгілері",q:"Қызыл айқышы бар көк дөңгелек (3.27) нені білдіреді?",fig:"3.27",o:["Тек аялдауға тыйым","Тоқтауға да, аялдауға да тыйым","Тұраққа рұқсат","Жылдамдықты шектеу"],a:1,ex:"3.27 — мәжбүрлі тоқтаудан басқа жағдайда тоқтауға да, аялдауға да тыйым салады."},
+{t:"Жол белгілері",q:"Сары ромб тәрізді белгі (2.1) нені білдіреді?",fig:"2.1",o:["Қосалқы жол","Сіз басты жолмен келе жатырсыз","Тұйық көше","Бір бағытты жол"],a:1,ex:"2.1 «Басты жол» — реттелмеген қиылыста сізге басымдық береді."},
+{t:"Жол белгілері",q:"Көк дөңгелек ішіндегі ақ көрсеткі (нұсқау белгісі) нені білдіреді?",fig:"4.1.1",o:["Тыйым салынған бағытты","Міндетті қозғалыс бағытын","Ұсынылатын, бірақ міндетсіз бағытты","Тек велосипедшіге арналған"],a:1,ex:"Көк дөңгелек — нұсқау тобы: ондағы көрсеткі МІНДЕТТІ бағытты білдіреді."},
+{t:"Жол белгілері",q:"4.3 «Шеңбер бойымен қозғалыс» белгісі бар қиылыста кім басым?",fig:"4.3",o:["Шеңберге кіретін көлік","Шеңбердің ішінде келе жатқан көлік","Әрқашан оң жақтағы","Үлкенірек көлік"],a:1,ex:"ҚР-да (2017 ж. бері) шеңберге КІРЕТІН көлік ішіндегіге жол береді."},
+
+{t:"Жол таңбалары",q:"Жолдағы тұтас сызық (1.1) нені білдіреді?",o:["Кесіп өтуге рұқсат","Кесіп өтуге тыйым","Тек түнде көрінеді","Жаяу өткел"],a:1,ex:"1.1 тұтас сызықты кесуге болмайды — озу да, бұрылу да жоқ."},
+{t:"Жол таңбалары",q:"Үзік сызық (1.5) нені білдіреді?",o:["Кесуге қатаң тыйым","Кесіп өтуге рұқсат (озу, қатар ауыстыру)","Тек жаяу жүргіншіге","Жол жөндеу аймағы"],a:1,ex:"Үзік сызықты кесуге рұқсат; штрихтер арасы — қашықтыққа тең."},
+{t:"Жол таңбалары",q:"Қос тұтас сызық (1.3) нені білдіреді?",o:["Жолды кеңейту","Кесуге қатаң тыйым","Бір бағытты жол","Тұрақ орны"],a:1,ex:"1.3 үш және одан көп жолақты жолда қарсы ағындарды бөледі; кесуге қатаң тыйым."},
+{t:"Жол таңбалары",q:"«Зебра» (1.14.1) таңбасы нені белгілейді?",o:["Велосипед жолын","Жаяу жүргіншілер өткелін","Тоқтау орнын","Тұрақты"],a:1,ex:"1.14.1 — жаяу жүргіншілер өткелі; жаяу адам осы жерден жолды кеседі."},
+
+{t:"Бағдаршам",q:"Жыпылықтаған жасыл сигнал нені білдіреді?",o:["Қозғалысқа тыйым","Рұқсат, бірақ көп ұзамай тыйым сигналы жанады","Қиылыс реттелмейді","Тек оңға рұқсат"],a:1,ex:"Жыпылықтаған жасыл — рұқсат әлі бар, бірақ тыйым жақын; тоқтауға дайын болыңыз."},
+{t:"Бағдаршам",q:"Жыпылықтаған сары сигнал нені білдіреді?",o:["Толық тоқтау","Қиылыс реттелмейді — сақтықпен өтіңіз","Артқа жүру","Қозғалысқа толық тыйым"],a:1,ex:"Жыпылықтаған сары — қиылыс реттелмейтінін, басымдық белгілеріне сүйену керектігін білдіреді."},
+{t:"Бағдаршам",q:"Тұрақты сары сигнал нені білдіреді?",o:["Рұқсат","Тыйым (қауіпсіз тоқтай алмайтынға қозғалысты аяқтауға рұқсат)","Артқа жүруге рұқсат","Тек жаяу жүргіншіге"],a:1,ex:"Сары — тыйым сигналы; бірақ кенет тоқтай алмайтын жүргізушіге қозғалысты аяқтауға рұқсат."},
+{t:"Бағдаршам",q:"Реттеушінің ишараты мен бағдаршам сигналы қайшы келсе нені орындайсыз?",o:["Бағдаршамды","Реттеушінің ишаратын","Жол таңбасын","Өз қалауыңша"],a:1,ex:"Иерархия бойынша реттеуші бағдаршамнан да жоғары: оның ишараты басым."},
+{t:"Бағдаршам",q:"Негізгі жасыл жанбай тұрып қосымша секциядағы жасыл көрсеткі жанса, не істейсіз?",o:["Басымдықпен өтемін","Сол бағытқа жүремін, бірақ басқа бағыттағыларға жол беремін","Тоқтап тұрамын","Артқа жүремін"],a:1,ex:"Қосымша секция көрсеткісі рұқсат береді, бірақ басымдық бермейді — өзге қатысушыларға жол беру керек."},
+{t:"Бағдаршам",q:"Қызыл сигналда жолда «стоп-сызық» (1.12) болса, қай жерде тоқтайсыз?",o:["Қиылыстың дәл ортасында","Стоп-сызықтың алдында","Жаяу өткелдің үстінде","Қалаған жеріңізде"],a:1,ex:"Тоқтау сызығы болса — нақ соның алдында тоқтайсыз."},
+
+{t:"Басымдық",q:"Тең (бірдей жабынды) жолдар қиылысында кімге жол бересіз?",o:["Сол жақтан келе жатқанға","Оң жақтан келе жатқанға","Жылдамырақ келе жатқанға","Үлкенірек көлікке"],a:1,ex:"«Оңнан кедергі» — тең жолдарда оң жағыңыздан келе жатқан көлікке жол бересіз."},
+{t:"Басымдық",q:"Реттелмеген қиылыста солға бұрылғанда кімге жол бересіз?",o:["Ешкімге","Қарсыдан тура немесе оңға келе жатқан көлікке","Артыңыздағыға","Тек жаяу жүргіншіге"],a:1,ex:"Тура/оңға жүру солға бұрылудан басым; сондықтан қарсы келе жатқанға жол беру керек."},
+{t:"Басымдық",q:"Бағдаршам жасыл, сіз де, трамвай да тура жүреді. Кім басым?",o:["Сіз","Трамвай","Кезекпен","Жылдамырағы"],a:1,ex:"Тең жағдайда трамвай рельссіз көліктен басым — қай бағытқа барса да."},
+{t:"Басымдық",q:"«STOP» белгісінде көлік жоқ болса, тоқтамай өтуге бола ма?",o:["Иә, көлік болмаса болады","Жоқ, толық тоқтау кез келген жағдайда міндетті","Тек түнде болады","Тек жаяу болмаса болады"],a:1,ex:"2.5 — тоқтау белгісі толық тоқтауды бұлжытпай талап етеді, көлік бар-жоғына қарамастан."},
+{t:"Басымдық",q:"Реттелмеген қиылыста «Басты жол» (2.1) белгісі тұр. Кім басым?",o:["Қосалқы жолдағы","Басты жолдағы көлік","Оң жақтағы","Сол жақтағы"],a:1,ex:"Басты жолдағы көлік басым; қосалқы жолдан шыққан оған жол береді."},
+{t:"Басымдық",q:"Екі көлік бір мезетте бір-біріне қарай қатар ауыстырса, кім жол береді?",o:["Сол жағында көлік бар көлік","Оң жағында көлік бар көлік","Жылдамырағы","Артта келе жатқаны"],a:1,ex:"«Оңнан кедергі» ережесі: оң жағында көлігі бар көлік жол береді."},
+
+{t:"Жылдамдық",q:"Елді мекен ішінде жеңіл автомобильдің әдепкі жылдамдық шегі қанша?",o:["40 км/сағ","60 км/сағ","80 км/сағ","90 км/сағ"],a:1,ex:"Елді мекен ішінде әдепкі шек — 60 км/сағ (белгімен 90-ға дейін көтерілуі мүмкін)."},
+{t:"Жылдамдық",q:"Тұрғын аймақ пен аула аумағында ең жоғары жылдамдық қанша?",o:["10 км/сағ","20 км/сағ","30 км/сағ","40 км/сағ"],a:1,ex:"Тұрғын аймақ пен аулада — 20 км/сағ; мұнда жаяу жүргінші басым."},
+{t:"Жылдамдық",q:"Елді мекеннен тыс бөлу жолағы бар жолда жеңіл авто ең көп қанша жүре алады?",o:["90 км/сағ","100 км/сағ","110 км/сағ","140 км/сағ"],a:2,ex:"Бөлу жолағы бар жолда жеңіл авто — 110 км/сағ-қа дейін."},
+{t:"Жылдамдық",q:"Автомагистральда (тиісті 3.24 белгісімен) жеңіл автоның ең жоғары жылдамдығы?",o:["110 км/сағ","120 км/сағ","130 км/сағ","140 км/сағ"],a:3,ex:"Автомагистральда белгімен бекітілген ең жоғары шек — 140 км/сағ."},
+{t:"Жылдамдық",q:"Кузовта адам тасымалдағанда жылдамдық шегі қанша?",o:["40 км/сағ","60 км/сағ","70 км/сағ","90 км/сағ"],a:1,ex:"Жүк көлігінің кузовында адам тасығанда жылдамдық 60 км/сағ-тан аспауы тиіс."},
+{t:"Жылдамдық",q:"Жүргізуші жылдамдықты немен сәйкестендіруге міндетті?",o:["Тек жол белгісімен","Көрінумен, ауа райымен, жол мен жүк жағдайымен","Көршілес көлікпен","Өз қалауымен"],a:1,ex:"Шектен аспаудан бөлек, жүргізуші нақты жағдайды (көріну, ауа райы, жол) ескеруі тиіс."},
+
+{t:"Тоқтау/тұрақ",q:"«Аялдау» дегеніміз қандай тоқтату?",o:["1 минутқа дейінгі","5 минуттан ұзақ (отырғызу-түсіруге қажет болмаса)","Қозғалтқышты өшіру","Тек түнгі тоқтату"],a:1,ex:"Аялдау — 5 минуттан асатын тоқтату, ол отырғызу-түсіру немесе жүкке байланысты болмаса."},
+{t:"Тоқтау/тұрақ",q:"Маршруттық көлік аялдамасынан қанша жақын жерде аялдауға болмайды?",o:["5 м","10 м","15 м","30 м"],a:2,ex:"Аялдамадан 15 м жақын жерде аялдауға болмайды (жолаушы отырғызудан басқа)."},
+{t:"Тоқтау/тұрақ",q:"Қиылыс шетінен қанша жақын жерде тоқтауға тыйым салынады?",o:["3 м","5 м","10 м","15 м"],a:1,ex:"Қиылыс шетінен 5 м жақын жерде тоқтауға болмайды."},
+{t:"Тоқтау/тұрақ",q:"Бір қызыл диагональ сызығы бар көк дөңгелек (3.28) нені білдіреді?",fig:"3.28",o:["Тоқтауға да тыйым","Тек аялдауға тыйым (қысқа тоқтауға болады)","Тұраққа рұқсат","Жылдамдықты шектеу"],a:1,ex:"3.28 тек аялдауға тыйым салады; жолаушы түсіру/тиеу үшін қысқа тоқтауға болады."},
+
+{t:"Маневр",q:"Артқа жүруге қай жерде тыйым салынады?",o:["Бос тұрақта","Қиылыстарда (және өткел, көпір, аялдамада)","Жеке аулада","Кең жолда"],a:1,ex:"Қиылыста, жаяу өткелде, көпір/тоннель, теміржол өткелі мен аялдамада артқа жүруге тыйым."},
+{t:"Маневр",q:"Озар алдында ең алдымен немен көз жеткізесіз?",o:["Музыканың дауысымен","Қарсы жолақтың бос әрі озуды қауіпсіз аяқтай алатыныңызбен","Жанармай мөлшерімен","Жолаушылардың санымен"],a:1,ex:"Озу — қарсы ағынға шығатын қауіпті маневр; алдымен қауіпсіз аяқтай алатыныңызды бағалаңыз."},
+{t:"Маневр",q:"Бұрылыс шамын (көрсеткіш) қосу нені білдіреді?",o:["Өзгелерге артықшылық береді","Тек ниетті білдіреді, артықшылық бермейді","Жол беруді талап етеді","Тоқтауды талап етеді"],a:1,ex:"Көрсеткіш — ниетіңізді хабарлайды, бірақ маневрге басымдық бермейді."},
+{t:"Маневр",q:"Тұтас сызықты кесіп қарсы жолаққа шығудың салдары қандай?",o:["Ескерту ғана","Ауыр бұзушылық; қайталанса жүргізуші куәлігінен айыруға дейін","Айыппұл жоқ","Тек түнде жазаланады"],a:1,ex:"Қарсы жолаққа заңсыз шығу — ауыр бұзушылық; қайталанса құқықтан айыру қолданылуы мүмкін."},
+
+{t:"Қауіпсіздік",q:"7 жасқа толмаған баланы көлікте қалай тасу керек?",o:["Алдыңғы орындықта еркін","Арнайы ұстау құрылғысында (балалар орындығы)","Ересектің қолында","Жүк бөлімінде"],a:1,ex:"7 жасқа дейінгі бала арнайы ұстау құрылғысында тасылуы міндетті."},
+{t:"Қауіпсіздік",q:"ЖКО кезінде елді мекеннен тыс авариялық тоқтау белгісін қанша қашықтыққа қою керек?",o:["Кемінде 5 м","Кемінде 15 м","Кемінде 30 м","Қажет емес"],a:2,ex:"Елді мекеннен тыс — кемінде 30 м; елді мекенде — кемінде 15 м."},
+{t:"Қауіпсіздік",q:"Жедел медициналық жәрдемнің нөмірі қандай?",o:["101","102","103 (немесе 112)","104"],a:2,ex:"Жедел жәрдем — 103; бірыңғай шұғыл қызмет — 112."},
+{t:"Қауіпсіздік",q:"Түнде елді мекеннен тыс жүрген жаяу жүргіншіге не міндетті?",o:["Шамшырақ ұстау","Жарық шағылыстыратын элемент тағу","Сары жилет киюге кеңес","Ешқандай талап жоқ"],a:1,ex:"Көрінуі нашар жағдайда елді мекеннен тыс жаяу жүргінші жарық шағылыстыратын элемент тағуға тиіс."},
+{t:"Қауіпсіздік",q:"Мас (алкоголь/есірткі) күйде көлік басқаруға бола ма?",o:["Аз мөлшерде болады","Қатаң тыйым салынады","Тек қала ішінде болады","Тек тәжірибелі жүргізушіге"],a:1,ex:"Мас күйде басқару — қатаң тыйым; реакцияны баяулатып, ауыр салдарға әкеледі."},
+{t:"Қауіпсіздік",q:"Ұзақ сапарда шаршауды болдырмаудың дұрыс жолы қандай?",o:["Жылдамдықты арттыру","Әр 2–3 сағатта демалу","Терезені ашып қою жеткілікті","Көбірек кофе ішу ғана"],a:1,ex:"Шаршау мен ұйқысыздық алкогольмен бірдей қауіпті — әр 2–3 сағатта демалу қажет."},
+
+{t:"Жол белгілері",q:"Көк дөңгелек ішіндегі солға бағытталған ақ көрсеткі (4.1.3) нені талап етеді?",fig:"4.1.3",o:["Тек оңға жүруді","Тек солға жүруді","Кері бұрылуды","Тоқтауды"],a:1,ex:"4.1.3 «Солға қозғалыс» — нұсқау тобының белгісі, тек сол бағытта жүруді міндеттейді."},
+{t:"Жол белгілері",q:"Ақ дөңгелек, қызыл жиегі бар әрі оңға бұрылыс көрсеткісі қызылмен сызылған белгі (3.18.1) нені білдіреді?",fig:"3.18.1",o:["Тек оңға бұрылуды","Оңға бұрылуға тыйым","Кері бұрылуға тыйым","Тұраққа тыйым"],a:1,ex:"3.18.1 келесі қиылыста оңға бұрылуға тыйым салады; кері бұрылуға (разворот) тыйым салмайды."},
+{t:"Жол белгілері",q:"Уақытша көк тікбұрышты белгі жанындағы ақ алаң нені білдіреді?",o:["Тыйым тобын","Сервис нысаны (ЖҚС, аурухана т.б.)","Жылдамдық шегін","Басты жолды"],a:1,ex:"Ақ алаңы бар көк тікбұрыш — сервис белгісі: ЖҚС, аурухана, тұрақ сияқты нысандарды көрсетеді."},
+{t:"Жалпы ережелер",q:"«Тұрғын аймақта» (аула аумағында) кім басым?",o:["Жүргізуші","Жаяу жүргінші","Жүк көлігі","Маршруттық көлік"],a:1,ex:"Тұрғын аймақ пен аула аумағында жаяу жүргінші басым; жылдамдық 20 км/сағ-тан аспайды."},
+{t:"Жалпы ережелер",q:"2026 жылғы реформаға сай автоматпен оқыған жүргізуші механикалық көлік айдай ала ма?",o:["Жоқ, тыйым салынады","Иә, 12.07.2026-дан бастап рұқсат","Тек қосымша емтиханнан соң","Тек жүк көлігін"],a:1,ex:"12.07.2026-дан автомат/механика шектеуі жойылды — автоматпен тапсырған механиканы да айдай алады."},
+{t:"Жол таңбалары",q:"Уақытша (сары) таңба мен тұрақты (ақ) таңба қайшы келсе, қайсысы басым?",o:["Ақ таңба","Сары (уақытша) таңба","Кеңірегі","Жаңасы"],a:1,ex:"Уақытша сары таңбалар тұрақты ақ таңбалардан басым саналады."},
+{t:"Жол таңбалары",q:"Жүру бөлігінің шетін белгілейтін тұтас жиек сызығы (1.2) нені көрсетеді?",o:["Қарсы ағынды","Жүру бөлігінің шетін","Жаяу өткелді","Тұрақ орнын"],a:1,ex:"1.2 — жүру бөлігінің шеткі шекарасын белгілейтін тұтас жиек сызығы."},
+{t:"Бағдаршам",q:"Реттеушінің қолы тігінен жоғары көтерілген. Бұл нені білдіреді?",o:["Барлық бағытқа рұқсат","Барлық бағытқа тыйым (сары сигналға ұқсас)","Тек оңға рұқсат","Артқа жүруге рұқсат"],a:1,ex:"Қол жоғары көтерілгенде — барлық қатысушыға тыйым; бұл бағдаршамның сары сигналына сәйкес."},
+{t:"Бағдаршам",q:"Қызыл сигналмен бірге жанған қызыл+сары не білдіреді?",o:["Қозғалуға рұқсат","Қозғалуға дайындал, бірақ әлі тұр (тыйым)","Артқа жүр","Қиылыс реттелмейді"],a:1,ex:"Қызыл+сары — әлі тыйым, бірақ көп ұзамай жасыл жанады; қозғалуға дайындалыңыз."},
+{t:"Басымдық",q:"Реттелмеген қиылыста кері бұрылғанда (разворот) кімге жол бересіз?",o:["Ешкімге","Қарсыдан тура немесе оңға келе жатқан көлікке","Тек жаяуға","Артыңыздағыға"],a:1,ex:"Кері бұрылу солға бұрылумен тең — қарсыдан тура/оңға келе жатқан көлікке жол беру керек."},
+{t:"Жылдамдық",q:"Жүк автомобилі (3,5 т-дан асатын) елді мекеннен тыс әдетте қандай жылдамдықпен жүреді?",o:["60 км/сағ","90 км/сағ","110 км/сағ","140 км/сағ"],a:1,ex:"Ауыр жүк көлігі үшін елді мекеннен тыс әдеттегі шек — 90 км/сағ."},
+{t:"Тоқтау/тұрақ",q:"Теміржол өткелінде тоқтауға бола ма?",o:["Иә, абайлап","Жоқ, тыйым салынады","Тек күндіз","Тек шлагбаум жабылғанда"],a:1,ex:"Теміржол өткелінде тоқтауға тыйым салынады — бұл аса қауіпті аймақ."},
+{t:"Маневр",q:"Қатар ауыстырғанда кімге жол бересіз?",o:["Артыңыздағы көлікке","Сол бағытта өзгермей келе жатқан көлікке","Қарсы көлікке","Ешкімге"],a:1,ex:"Қатар ауыстырғанда сол жолақта өзгеріссіз келе жатқан көлікке жол бересіз."},
+{t:"Маневр",q:"Жолда тұтас сызық (1.1) тұрса, озуға бола ма?",o:["Иә, абайлап","Жоқ — тұтасты кесуге тыйым","Тек түнде","Тек жүк көлігін"],a:1,ex:"Тұтас 1.1 сызықты кесуге тыйым салынады — озу да, бұрылу да болмайды."},
+{t:"Қауіпсіздік",q:"Күндіз қала ішінде жүргенде көлік шамы туралы талап қандай?",o:["Шам қажет емес","Жақын жарық не күндізгі жүру шамы қосулы болуы тиіс","Тек алыс жарық","Тек авариялық сигнал"],a:1,ex:"Күндіз де жақын жарық немесе күндізгі жүру шамдары қосулы болуы міндетті."}
+];
+
+/* ============================================================
+   ҚИЫЛЫС СЦЕНАРИЙЛЕРІ (интерактив тренажер)
+   from: S(төмен) N(жоғары) W(сол) E(оң) — көлік қай жақтан келеді
+   to:   straight | left | right
+   order: дұрыс өту кезегі (көлік әріптерімен)
+   ============================================================ */
+const SCENARIOS = [
+  { title:'Тең қиылыс · солға бұрылу', kind:'Реттелмеген, белгісіз тең жолдар',
+    cars:[ {id:'A',from:'S',to:'straight',color:'#F2A900'},
+           {id:'B',from:'N',to:'left',color:'#1B5FB0'} ],
+    order:['A','B'],
+    ex:'Тең жолдарда қарсыдан тура жүрген «A» басым. Солға бұрылатын «B» қарсы ағынды өткізіп барып қозғалады.' },
+
+  { title:'Басты жол · екі көлік', kind:'Басты және қосалқы жол',
+    signs:{ W:'main', S:'yield' },
+    cars:[ {id:'A',from:'W',to:'straight',color:'#F2A900'},
+           {id:'B',from:'S',to:'straight',color:'#1B5FB0'} ],
+    order:['A','B'],
+    ex:'«A» — басты жолда (2.1), сондықтан бірінші өтеді. «B» қосалқы жолдан шыққан — «Жол беріңіз» (2.4) талабымен соңынан жүреді.' },
+
+  { title:'Басты жол · үш көлік', kind:'Басты жол + солға бұрылыс',
+    signs:{ S:'main', N:'main', E:'yield' },
+    cars:[ {id:'A',from:'S',to:'straight',color:'#F2A900'},
+           {id:'B',from:'N',to:'left',color:'#1B5FB0'},
+           {id:'C',from:'E',to:'straight',color:'#1E9D55'} ],
+    order:['A','B','C'],
+    ex:'«A» — басты жолда тура (бірінші). «B» да басты жолда, бірақ солға бұрылып қарсы «A»-ға жол береді (екінші). «C» қосалқы жолдан — барлығынан соң (үшінші).' },
+
+  { title:'Бағдаршам · солға бұрылу', kind:'Барлық бағытта жасыл',
+    light:true,
+    cars:[ {id:'A',from:'S',to:'straight',color:'#F2A900'},
+           {id:'B',from:'N',to:'left',color:'#1B5FB0'} ],
+    order:['A','B'],
+    ex:'Жасыл сигнал қозғалысқа рұқсат береді, бірақ басымдық бермейді. Солға бұрылатын «B» қарсыдан тура келе жатқан «A»-ны өткізеді.' },
+
+  { title:'«STOP» белгісі', kind:'Басты жол + толық тоқтау',
+    signs:{ W:'main', S:'stop' },
+    cars:[ {id:'A',from:'W',to:'straight',color:'#F2A900'},
+           {id:'B',from:'S',to:'left',color:'#1B5FB0'} ],
+    order:['A','B'],
+    ex:'«B» алдында 2.5 «Тоқтамай жүруге болмайды» — стоп-сызық алдында МІНДЕТТІ түрде толық тоқтап, басты жолдағы «A»-ны өткізіп барып бұрылады.' }
+];
+
+/* ============================================================
+   АЙЫППҰЛ КЕСТЕСІ (2026, 1 АЕК = 4 325 ₸)
+   [ауырлық, бұзушылық, АЕК саны | 'dep' = құқықтан айыру]
+   ============================================================ */
+const FINES = [
+  ['mid', 'Жылдамдықты 10–40 км/сағ-қа арттыру', 5],
+  ['high','Жылдамдықты 40 км/сағ-тан астам арттыру (қайталанса — 30 АЕК)', 20],
+  ['high','Бағдаршамның тыйым (қызыл) сигналына өту', 10],
+  ['high','Жаяу жүргіншіге жол бермеу', 10],
+  ['low', 'Жол белгісі немесе таңба талабын бұзу', 3],
+  ['mid', 'Қауіпсіздік белдігін тақпау (жүргізуші не жолаушы)', 5],
+  ['mid', 'Жүргізу кезінде телефонды қолмен пайдалану', 5],
+  ['mid', 'Техникалық ақауы бар көлікті басқару', 5],
+  ['mid', 'Тұраққа қою (аялдау) тәртібін бұзу', 5],
+  ['high','Тротуарға, газонға не мүгедек орнына тұрақтау', 10],
+  ['low', 'Балаларды тасу ережесін сақтамау', 5],
+  ['high','Жүргізуші куәлігінсіз көлік басқару', 20],
+  ['high','Уәкілетті адамның тоқтау талабын орындамау', 40],
+  ['high','Құқығынан айырылған кезде көлік басқару', 50],
+  ['high','Мас күйде көлік басқару', 'dep'],
+  ['low', 'Жаяу жүргіншінің жол ережесін бұзуы', 2]
+];
+
+/* ============================================================
+   ИКОНКАЛАР + КӨМЕКШІЛЕР
+   ============================================================ */
+const svgI = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const IC = {
+  home: svgI('<path d="M3 11l9-7 9 7"/><path d="M5 9.8V20h14V9.8"/>'),
+  book: svgI('<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H18v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 1 6.5 18H18v3H6.5A1.5 1.5 0 0 1 5 19.5z"/>'),
+  sign: svgI('<path d="M12 3.5l8.5 15H3.5z"/><path d="M12 10v3.5M12 16.5h.01"/>'),
+  cross:svgI('<path d="M12 3v18M3 12h18"/>'),
+  list: svgI('<path d="M9.5 5h10M9.5 12h10M9.5 19h10"/><path d="M4 4.7l1.1 1.1L7 4"/><path d="M4 11.7l1.1 1.1L7 11"/><path d="M4 18.7l1.1 1.1L7 18"/>'),
+  exam: svgI('<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5V2.6h6v.9"/><path d="M12 9v3.2l2.2 1.3"/>'),
+  fine: svgI('<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9.5 8.5h5M9.5 12h5"/>'),
+  clock:svgI('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 1.8"/>'),
+  flag: svgI('<path d="M6 21V4M6 4h11l-2 3 2 3H6"/>'),
+  arrow:svgI('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  play: svgI('<rect x="3" y="6" width="12" height="12" rx="2"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/>'),
+  moon: svgI('<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'),
+  sun:  svgI('<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
+  search: svgI('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'),
+  check: svgI('<path d="M5 13l4 4L19 7"/>'),
+  trash: svgI('<path d="M4 7h16M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M6.5 7l1 12.5A1.5 1.5 0 0 0 9 21h6a1.5 1.5 0 0 0 1.5-1.5L17.5 7"/>'),
+  warnTri: svgI('<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>')
+};
+
+const TOPICS = ['Жалпы ережелер','Жол белгілері','Жол таңбалары','Бағдаршам','Басымдық','Жылдамдық','Тоқтау/тұрақ','Маневр','Қауіпсіздік'];
+const SIGN_BY = {}; SIGNS.forEach(s => { SIGN_BY[s[1]] = s; });
+const LETTERS = ['А','Б','В','Г'];
+
+const V    = document.getElementById('view');
+const NEL  = document.getElementById('nav');
+const MOD  = document.getElementById('modal');
+const MCARD= document.getElementById('modalCard');
+
+const shuffle = a => { const r=a.slice(); for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [r[i],r[j]]=[r[j],r[i]];} return r; };
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+
+/* ---------- мемлекеттік дайындық индексі ---------- */
+function readiness(){
+  const sc = Object.keys(PROG.signsSeen).length / SIGNS.length;
+  let tsum=0; TOPICS.forEach(t=> tsum += (PROG.topicsBest[t]||0));
+  const tc = tsum / (TOPICS.length*100);
+  const ex = (PROG.examBest||0) / EXAM.q;
+  const lr = Object.keys(PROG.lessonsRead||{}).length / LESSONS.length;
+  return Math.round((sc*0.20 + tc*0.30 + ex*0.35 + lr*0.15)*100);
+}
+
+/* ============================================================
+   НАВИГАЦИЯ + РОУТЕР
+   ============================================================ */
+const NAV = [
+  ['home','Басты бет',IC.home],
+  ['theory','Теория',IC.book],
+  ['video','Видео',IC.play],
+  ['signs','Белгілер',IC.sign],
+  ['xroad','Қиылыс',IC.cross],
+  ['test','Тест',IC.list],
+  ['exam','Емтихан',IC.exam],
+  ['fines','Айыппұл',IC.fine]
+];
+let curView='home', curLesson=0, quiz=null;
+
+function renderNav(){
+  NEL.innerHTML = NAV.map(([k,label,ic])=>
+    `<button class="nav-btn ${k===curView?'on':''}" onclick="go('${k}')">${ic}<span>${label}</span></button>`
+  ).join('');
+}
+function go(v){
+  stopTimer();
+  if(vRAF){ cancelAnimationFrame(vRAF); vRAF=null; }
+  const md=document.getElementById('modal'); if(md) md.classList.remove('open');
+  curView=v; renderNav(); window.scrollTo({top:0,behavior:'instant'});
+  ({home:renderHome, theory:renderTheory, video:renderVideo, signs:renderSigns, xroad:renderXroad,
+    test:renderTest, exam:renderExam, fines:renderFines}[v])();
+}
+
+/* ============================================================
+   БАСТЫ БЕТ
+   ============================================================ */
+function renderHome(){
+  const r = readiness();
+  const rcol = r<40?'Бастауыш':r<70?'Орташа':'Сенімді';
+  const rclr = r<40?'#E0392F':r<70?'#F2A900':'#1E9D55';
+  const seen = Object.keys(PROG.signsSeen).length;
+  const tA = TOPICS.filter(t=>PROG.topicsBest[t]!=null).length;
+  const stats = [
+    [`${seen}/${SIGNS.length}`,'Меңгерілген белгі',IC.sign,'#A9750A','#fcedcb'],
+    [`${tA}/${TOPICS.length}`,'Өтілген тақырып',IC.list,'#1B5FB0','#e7f0fb'],
+    [`${PROG.examBest||0}/${EXAM.q}`,'Емтихан үздігі',IC.exam,'#E0392F','#fbe3e1'],
+    [`${PROG.examTries||0}`,'Емтихан әрекеті',IC.clock,'#1E9D55','#dcf2e5']
+  ];
+  const mods = [
+    ['theory','Теория курсы','Он модуль: ұғымдардан бастап қауіпсіздік пен алғашқы көмекке дейін.',IC.book,'#1B5FB0','#e7f0fb'],
+    ['signs','Жол белгілері',`${SIGN_CATS.length} топ, ${SIGNS.length} белгі — әрқайсысының мәні, пішіні мен қолданысы.`,IC.sign,'#A9750A','#fcedcb'],
+    ['video','Видео сабақтар','Қозғалыстағы анимациялар: бағдаршам, қиылыс, өткел, ара қашықтық.',IC.play,'#1E9D55','#dcf2e5'],
+    ['xroad','Қиылыс тренажері','Көліктердің өту кезегін интерактив сахнада өз қолыңызбен жаттығыңыз.',IC.cross,'#1E9D55','#dcf2e5'],
+    ['test','Тақырыптық тест','Тоғыз тақырып бойынша бірден талданатын кері байланыспен.',IC.list,'#1B5FB0','#e7f0fb'],
+    ['exam','Емтихан симуляторы','40 сұрақ, 40 минут — нақ мемлекеттік емтихандағыдай жағдай.',IC.exam,'#E0392F','#fbe3e1'],
+    ['fines','Айыппұл кестесі','2026 жылғы АЕК негізіндегі өзекті жаза мөлшерлері.',IC.fine,'#A9750A','#fcedcb']
+  ];
+  V.innerHTML = `<div class="view">
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="eyebrow">Қазақстан · ЖҚЕ 2026</div>
+        <h2>Рульге сенімді отыр</h2>
+        <p>Теорияны ұғымнан бастап меңгеріп, белгілер мен қиылыстарды жаттығып, нақ емтихандағыдай қырық сұрақтық сынақтан өтіңіз — барлығы соңғы 2026 жылғы өзгерістермен.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" onclick="go('theory')">${IC.book} Теорияны бастау</button>
+          <button class="btn btn-dark" onclick="go('exam')">Емтиханға кірісу</button>
+        </div>
+      </div>
+      <div class="card gauge-card">
+        <div class="gauge-wrap">
+          ${gaugeSVG(r)}
+          <div class="gauge-val"><b>${r}<span class="pct">%</span></b></div>
+        </div>
+        <div class="gauge-status" style="color:${rclr}">${rcol}</div>
+        <div class="gauge-cap">Дайындық деңгейі — белгілер, тесттер мен емтихан нәтижесі бойынша.</div>
+      </div>
+    </section>
+
+    <div class="stat-row">
+      ${stats.map(([n,l,ic,c,bg])=>`<div class="card stat"><div class="ic" style="background:${bg};color:${c}">${ic}</div><div class="n">${n}</div><div class="l">${l}</div></div>`).join('')}
+    </div>
+
+    <div class="card news">
+      <h3>2026 жылғы өзгерістер <span class="live">Жаңа</span></h3>
+      <ul>${NEWS.map(([t,d])=>`<li><span class="dot"></span><span><b>${t}</b> ${d}</span></li>`).join('')}</ul>
+    </div>
+
+    <div class="eyebrow" style="margin-bottom:10px">Бөлімдер</div>
+    <div class="modules">
+      ${mods.map(([k,h,p,ic,c,bg])=>`<button class="card mod" onclick="go('${k}')"><div class="mod-ic" style="background:${bg};color:${c}">${ic}</div><h4>${h}</h4><p>${p}</p><span class="go">Ашу ${IC.arrow}</span></button>`).join('')}
+    </div>
+
+    <div class="reset-row"><button class="reset-btn" onclick="resetProgress()">${IC.trash} Прогресті тазалау</button></div>
+
+    <div class="foot">«Жол академиясы» — оқу тренажері. Дереккөз: <b>ҚР Жол қозғалысы ережелері</b>, ҚР ІІМ 2026 бұйрықтары, Әкімшілік құқық бұзушылық туралы кодекс. Нақты емтихан мен айыппұл мөлшері уәкілетті орган жариялаған ресми құжатпен тексеріледі.</div>
+  </div>`;
+}
+
+function gaugeSVG(val){
+  const ARC=257.6, frac=clamp(val/100,0,1);
+  const col = val<40?'#E0392F':val<70?'#F2A900':'#1E9D55';
+  const fill = frac>0 ? `<path d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="${col}" stroke-width="17" stroke-linecap="round" stroke-dasharray="${(frac*ARC).toFixed(1)} 999"/>` : '';
+  return `<svg viewBox="0 0 200 116" style="width:100%;display:block">
+    <path d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="var(--gauge-track)" stroke-width="17" stroke-linecap="round"/>
+    ${fill}
+  </svg>`;
+}
+
+/* ============================================================
+   ТЕОРИЯ
+   ============================================================ */
+function lessonNavHTML(){
+  return LESSONS.map((l,i)=>`<button class="lesson-link ${i===curLesson?'on':''} ${PROG.lessonsRead[i]?'done':''}" onclick="lessonGo(${i})"><span class="num">${l.num}</span><span class="lt">${l.title}</span><span class="chk">${IC.check}</span></button>`).join('');
+}
+function theoryProgHTML(){
+  const read = Object.keys(PROG.lessonsRead).length;
+  return `<div class="qprog"><div class="bar"><div class="fill" id="lprogfill" style="width:${Math.round(read/LESSONS.length*100)}%"></div></div><div class="lab" id="lproglab">${read} / ${LESSONS.length} модуль оқылды</div></div>`;
+}
+function renderTheory(){
+  PROG.lessonsRead[curLesson]=1; saveProg();
+  V.innerHTML = `<div class="view">
+    <div class="eyebrow">Оқу курсы</div>
+    <h1 class="h-sec">Теория</h1>
+    <p class="sub">Жол қозғалысы ережесінің негізі — он модульге жинақталған. Әр тарауды оқып, оң жақтағы тізбе арқылы еркін ауысыңыз.</p>
+    <div class="theory-prog">${theoryProgHTML()}</div>
+    <div class="theory-grid" style="margin-top:18px">
+      <aside class="lesson-nav" id="lnav">${lessonNavHTML()}</aside>
+      <div class="card lesson-body" id="lbody">${lessonHTML(curLesson)}</div>
+    </div>
+  </div>`;
+}
+function lessonHTML(i){
+  const l = LESSONS[i];
+  return `<h2>${l.title}</h2><div class="lead">${l.lead}</div>${l.html}
+    <div class="lesson-foot">
+      <button class="btn btn-ghost btn-sm" ${i===0?'disabled':''} onclick="lessonGo(${i-1})">← Алдыңғы</button>
+      <button class="btn ${i===LESSONS.length-1?'btn-ghost':'btn-dark'} btn-sm" ${i===LESSONS.length-1?'onclick="go(\'signs\')"':`onclick="lessonGo(${i+1})"`}>${i===LESSONS.length-1?'Белгілерге өту →':'Келесі →'}</button>
+    </div>`;
+}
+function lessonGo(i){
+  curLesson=i;
+  PROG.lessonsRead[i]=1; saveProg();
+  document.getElementById('lbody').innerHTML = lessonHTML(i);
+  document.querySelectorAll('#lnav .lesson-link').forEach((b,k)=>{
+    b.classList.toggle('on',k===i);
+    if(PROG.lessonsRead[k]) b.classList.add('done');
+  });
+  const read=Object.keys(PROG.lessonsRead).length;
+  const fill=document.getElementById('lprogfill'), lab=document.getElementById('lproglab');
+  if(fill) fill.style.width=Math.round(read/LESSONS.length*100)+'%';
+  if(lab) lab.textContent=`${read} / ${LESSONS.length} модуль оқылды`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============================================================
+   ЖОЛ БЕЛГІЛЕРІ
+   ============================================================ */
+let signFilter='all', signQuery='';
+function renderSigns(){
+  V.innerHTML = `<div class="view">
+    <div class="eyebrow">Анықтамалық</div>
+    <h1 class="h-sec">Жол белгілері</h1>
+    <p class="sub">Белгіні басып, оның толық мағынасы мен қолданылу жағдайымен танысыңыз. Көрген белгілеріңіз дайындық индексіне қосылады.</p>
+    <div class="sign-tools">
+      <label class="sign-search">${IC.search}<input id="signSearch" type="search" autocomplete="off" placeholder="Белгіні атауы не коды бойынша іздеу…" oninput="setSignSearch(this.value)" value="${signQuery.replace(/"/g,'&quot;')}"></label>
+    </div>
+    <div class="sign-cats" id="scats">${signCatsHTML()}</div>
+    <div class="signs-grid" id="sgrid">${signCards()}</div>
+  </div>`;
+}
+function signCatsHTML(){
+  const cnt = c => SIGNS.filter(s=>s[0]===c).length;
+  return `<button class="sign-cat ${signFilter==='all'?'on':''}" onclick="setSignFilter('all')">Барлығы <span class="ct">${SIGNS.length}</span></button>`+
+    SIGN_CATS.map(([k,n,c])=>`<button class="sign-cat ${signFilter===k?'on':''}" onclick="setSignFilter('${k}')"><span class="sw" style="background:${c}"></span>${n} <span class="ct">${cnt(k)}</span></button>`).join('');
+}
+function signCards(){
+  const q = signQuery.trim().toLowerCase();
+  const list = SIGNS.filter(s=>(signFilter==='all'||s[0]===signFilter) &&
+    (!q || s[1].toLowerCase().includes(q) || s[2].toLowerCase().includes(q) || s[3].toLowerCase().includes(q)));
+  if(!list.length) return `<div class="signs-empty">«${signQuery}» бойынша белгі табылмады. Басқа сөзбен немесе кодпен іздеп көріңіз.</div>`;
+  return list.map(s=>`<button class="sign-card" onclick="openSign('${s[1]}')">${s[4]}<div class="code">${s[1]}</div><div class="nm">${s[2]}</div></button>`).join('');
+}
+function setSignFilter(f){
+  signFilter=f;
+  document.getElementById('scats').innerHTML = signCatsHTML();
+  document.getElementById('sgrid').innerHTML = signCards();
+}
+function setSignSearch(v){
+  signQuery=v;
+  document.getElementById('sgrid').innerHTML = signCards();
+}
+function openSign(code){
+  const s = SIGN_BY[code]; if(!s) return;
+  PROG.signsSeen[code]=1; saveProg();
+  const catName = (SIGN_CATS.find(c=>c[0]===s[0])||[])[1]||'';
+  MCARD.innerHTML = `<div class="bigsign">${s[4]}</div><div class="code">${catName} · ${s[1]}</div><h3>${s[2]}</h3><p>${s[3]}</p><button class="btn btn-dark modal-x" onclick="closeModal()">Жабу</button>`;
+  MOD.classList.add('open');
+}
+function closeModal(){ MOD.classList.remove('open'); }
+MOD.addEventListener('click', e=>{ if(e.target===MOD) closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ---- generic confirm dialog (reuses modal) ---- */
+let _confirmOk=null;
+function confirmModal(title, msg, okLabel, onOk){
+  _confirmOk = onOk;
+  MCARD.innerHTML = `<div class="confirm-ic">${IC.warnTri}</div>
+    <h3>${title}</h3><p>${msg}</p>
+    <div class="confirm-btns">
+      <button class="btn btn-ghost" onclick="closeModal()">Болдырмау</button>
+      <button class="btn btn-primary" onclick="runConfirm()">${okLabel}</button>
+    </div>`;
+  MOD.classList.add('open');
+}
+function runConfirm(){ const f=_confirmOk; _confirmOk=null; closeModal(); if(f) f(); }
+
+/* ---- reset all progress ---- */
+function resetProgress(){
+  confirmModal('Барлық прогресс өшірілсін бе?','Меңгерілген белгілер, оқылған модульдер, тест пен емтихан нәтижелері толық жойылады. Бұл әрекетті кері қайтару мүмкін емес.','Өшіру',()=>{
+    PROG.signsSeen={}; PROG.topicsBest={}; PROG.examBest=0; PROG.examTries=0; PROG.examLog=[]; PROG.lessonsRead={};
+    saveProg(); curLesson=0; go('home');
+  });
+}
+
+/* ---- theme ---- */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  const b=document.getElementById('themeBtn'); if(b) b.innerHTML = t==='dark'? IC.sun : IC.moon;
+  const m=document.querySelector('meta[name="theme-color"]'); if(m) m.content = t==='dark'? '#0E1216' : '#14171B';
+}
+function toggleTheme(){
+  const next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+  Store.set('jol_theme', next); applyTheme(next);
+}
+
+/* ---- keyboard support for quiz runner ---- */
+document.addEventListener('keydown', e=>{
+  if(!quiz || e.metaKey || e.ctrlKey || e.altKey) return;
+  if(!document.querySelector('.q-card')) return;
+  const t=e.target; if(t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+  const map={'1':0,'2':1,'3':2,'4':3,'a':0,'b':1,'c':2,'d':3};
+  const k=e.key.toLowerCase();
+  if(map[k]!=null){
+    const idx=map[k], q=quiz.qs[quiz.idx];
+    if(idx<q.o.length){ pickOpt(idx); e.preventDefault(); }
+  } else if(e.key==='ArrowRight'){
+    if(quiz.idx<quiz.qs.length-1){ navQ(1); e.preventDefault(); }
+  } else if(e.key==='ArrowLeft'){
+    if(quiz.idx>0){ navQ(-1); e.preventDefault(); }
+  } else if(quiz.mode==='exam' && k==='f'){
+    flagQ(); e.preventDefault();
+  }
+});
+
+/* ============================================================
+   ҚИЫЛЫС ТРЕНАЖЕРІ (canvas)
+   ============================================================ */
+let xrIdx=0, xrChosen=[], xrChecked=false, xrBoxes=[], xrCanvas=null, xrCtx=null;
+
+const HEAD = { S:[0,-1], N:[0,1], W:[1,0], E:[-1,0] };
+const XC=230, XHW=75;
+const CARPOS = {
+  S:{x:262,y:372,w:42,h:68,front:'up'},
+  N:{x:198,y:88, w:42,h:68,front:'down'},
+  W:{x:88, y:262,w:68,h:42,front:'right'},
+  E:{x:372,y:198,w:68,h:42,front:'left'}
+};
+const SIGNPOS = { S:[XC+XHW+18,XC+XHW+18], N:[XC-XHW-18,XC-XHW-18], W:[XC-XHW-18,XC+XHW+18], E:[XC+XHW+18,XC-XHW-18] };
+const EXITLANE = { '-1,0':[70,198], '1,0':[390,262], '0,-1':[262,70], '0,1':[198,390] };
+
+function renderXroad(){
+  V.innerHTML = `<div class="view">
+    <div class="eyebrow">Практика</div>
+    <h1 class="h-sec">Қиылыс тренажері</h1>
+    <p class="sub">Көліктердің дұрыс өту кезегін анықтаңыз: оларды бірінен соң бірін кезекпен басыңыз да, «Тексеру» түймесін басыңыз.</p>
+    <div class="xroad-wrap" style="margin-top:18px">
+      <div class="card xroad-stage">
+        <canvas id="xcanvas" width="460" height="460"></canvas>
+        <div class="runner-foot" style="justify-content:center;margin-top:14px">
+          <button class="btn btn-primary btn-sm" onclick="xrCheck()">Тексеру</button>
+          <button class="btn btn-ghost btn-sm" onclick="xrClear()">Тазалау</button>
+          <button class="btn btn-dark btn-sm" onclick="xrNext()">Келесі →</button>
+        </div>
+      </div>
+      <div class="xroad-side">
+        <div class="card">
+          <div class="xroad-q" id="xrq"></div>
+          <div class="xroad-meta" id="xrmeta"></div>
+          <div class="order-chips" id="xrchips"></div>
+          <div class="xroad-result" id="xrres"></div>
+          <div style="font-size:13px;color:var(--muted)">Сценарий <b id="xrn"></b> / ${SCENARIOS.length}</div>
+        </div>
+        <div class="card" style="padding:16px 18px">
+          <div style="font-family:var(--fd);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:10px">Ереже еске салғыш</div>
+          <div class="legend">
+            <div class="row">${miniSign('main',16)}<span>Басты жол — басымдыққа иесіз</span></div>
+            <div class="row">${miniSign('yield',16)}<span>Жол беріңіз — қосалқыдан шықсаңыз</span></div>
+            <div class="row">${miniSign('stop',16)}<span>Толық тоқтап барып өту</span></div>
+            <div class="row"><span class="car" style="background:#1E9D55"></span><span>Таңдалған көлік — жасыл нөмір</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  xrCanvas = document.getElementById('xcanvas');
+  xrCtx = xrCanvas.getContext('2d');
+  const dpr = window.devicePixelRatio||1;
+  xrCanvas.width = 460*dpr; xrCanvas.height = 460*dpr;
+  xrCtx.scale(dpr,dpr);
+  xrCanvas.addEventListener('pointerdown', xrTap);
+  xrLoad(xrIdx);
+}
+function miniSign(type,sz){
+  if(type==='main') return `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24"><g transform="rotate(45 12 12)"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5" fill="#fff"/><rect x="6.5" y="6.5" width="11" height="11" rx="1.5" fill="#FFCB05"/></g></svg>`;
+  if(type==='yield') return `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24"><polygon points="12,21 22,5 2,5" fill="#fff" stroke="#D2202A" stroke-width="2.4" stroke-linejoin="round"/></svg>`;
+  if(type==='stop') return `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24"><polygon points="8,2.5 16,2.5 21.5,8 21.5,16 16,21.5 8,21.5 2.5,16 2.5,8" fill="#D2202A"/></svg>`;
+  return '';
+}
+function xrLoad(i){
+  xrIdx=i; xrChosen=[]; xrChecked=false;
+  const sc = SCENARIOS[i];
+  document.getElementById('xrq').textContent = sc.title;
+  document.getElementById('xrmeta').textContent = sc.kind;
+  document.getElementById('xrn').textContent = i+1;
+  const res = document.getElementById('xrres'); res.className='xroad-result'; res.innerHTML='';
+  drawScene();
+  updateChips();
+}
+function carInfo(id){ return SCENARIOS[xrIdx].cars.find(c=>c.id===id); }
+function updateChips(){
+  const box = document.getElementById('xrchips');
+  if(!xrChosen.length){ box.innerHTML = '<span style="color:var(--muted-2);font-size:13px">Көліктерді кезегімен басыңыз…</span>'; return; }
+  box.innerHTML = xrChosen.map((id,k)=>{ const c=carInfo(id); return `<span class="ochip" style="background:${c.color}"><span class="seq">${k+1}</span>${c.id}</span>`; }).join('');
+}
+function xrTap(e){
+  if(xrChecked) return;
+  const rect = xrCanvas.getBoundingClientRect();
+  const lx = (e.clientX-rect.left)*(460/rect.width);
+  const ly = (e.clientY-rect.top)*(460/rect.height);
+  for(const b of xrBoxes){
+    if(Math.abs(lx-b.x)<=b.w/2+8 && Math.abs(ly-b.y)<=b.h/2+8){
+      const at = xrChosen.indexOf(b.id);
+      if(at>=0) xrChosen.splice(at,1); else xrChosen.push(b.id);
+      drawScene(); updateChips(); return;
+    }
+  }
+}
+function xrClear(){ if(xrChecked) return; xrChosen=[]; drawScene(); updateChips();
+  const res=document.getElementById('xrres'); res.className='xroad-result'; res.innerHTML=''; }
+function xrNext(){ xrLoad((xrIdx+1)%SCENARIOS.length); }
+function xrCheck(){
+  const sc = SCENARIOS[xrIdx], res=document.getElementById('xrres');
+  if(xrChosen.length < sc.cars.length){
+    res.className='xroad-result no';
+    res.innerHTML = `<b>Толық емес</b>Барлық ${sc.cars.length} көліктің өту кезегін көрсетіңіз.`;
+    return;
+  }
+  xrChecked=true;
+  const ok = xrChosen.join('')===sc.order.join('');
+  res.className = 'xroad-result '+(ok?'ok':'no');
+  const right = sc.order.map((id,k)=>`${k+1}) ${id}`).join('  ·  ');
+  res.innerHTML = ok
+    ? `<b>Дұрыс!</b>${sc.ex}`
+    : `<b>Қате</b>Дұрыс кезек: <b style="display:inline">${right}</b>. ${sc.ex}`;
+  drawScene();
+}
+
+/* ---- canvas drawing (realistic top-view) ---- */
+function drawScene(){
+  const g=xrCtx, C=230, HW=75;
+  g.clearRect(0,0,460,460);
+  const gr=g.createRadialGradient(C,193,30,C,193,360);
+  gr.addColorStop(0,'#2c343b'); gr.addColorStop(1,'#1b2025');
+  g.fillStyle=gr; g.fillRect(0,0,460,460);
+  g.fillStyle='#3b4147';
+  g.fillRect(C-HW,0,HW*2,460); g.fillRect(0,C-HW,460,HW*2);
+  g.strokeStyle='rgba(255,255,255,.5)'; g.lineWidth=3; g.beginPath();
+  [[C-HW+5,0,C-HW+5,C-HW],[C+HW-5,0,C+HW-5,C-HW],[C-HW+5,C+HW,C-HW+5,460],[C+HW-5,C+HW,C+HW-5,460],
+   [0,C-HW+5,C-HW,C-HW+5],[C+HW,C-HW+5,460,C-HW+5],[0,C+HW-5,C-HW,C+HW-5],[C+HW,C+HW-5,460,C+HW-5]]
+   .forEach(a=>{g.moveTo(a[0],a[1]);g.lineTo(a[2],a[3]);}); g.stroke();
+  g.strokeStyle='#F4C20D'; g.lineWidth=3.5; g.setLineDash([15,12]); g.lineCap='round'; g.beginPath();
+  [[C,10,C,C-HW-18],[C,C+HW+18,C,450],[10,C,C-HW-18,C],[C+HW+18,C,450,C]]
+   .forEach(a=>{g.moveTo(a[0],a[1]);g.lineTo(a[2],a[3]);}); g.stroke(); g.setLineDash([]); g.lineCap='butt';
+  ['S','N','W','E'].forEach(side=>drawCrosswalk(g,side));
+  const sc=SCENARIOS[xrIdx];
+  if(sc.signs) for(const appr in sc.signs){ const sp=SIGNPOS[appr]; drawSign(g,sc.signs[appr],sp[0],sp[1],30); }
+  if(sc.light) ['S','N','W','E'].forEach(appr=>{ const lp=SIGNPOS[appr]; drawLight(g,lp[0],lp[1]); });
+  xrBoxes=[];
+  sc.cars.forEach(c=>{ drawPath(g,c); const p=CARPOS[c.from]; xrBoxes.push({id:c.id,x:p.x,y:p.y,w:p.w,h:p.h}); });
+  sc.cars.forEach(c=>drawCar(g,c));
+}
+function drawCrosswalk(g,side){
+  const C=230,HW=75; g.fillStyle='rgba(255,255,255,.88)';
+  if(side==='S'||side==='N'){
+    const y0 = side==='S'? C+HW+6 : C-HW-22;
+    for(let i=0;i<6;i++){ const x=C-HW+8+i*((HW*2-16)/6); g.fillRect(x,y0,9,16); }
+    const ybar = side==='S'?C+HW+26:C-HW-28, bx = side==='S'?C:C-HW+4;
+    g.fillStyle='rgba(255,255,255,.8)'; g.fillRect(bx,ybar,HW-6,5);
+  } else {
+    const x0 = side==='E'? C+HW+6 : C-HW-22;
+    for(let i=0;i<6;i++){ const y=C-HW+8+i*((HW*2-16)/6); g.fillRect(x0,y,16,9); }
+    const xbar = side==='E'?C+HW+26:C-HW-28, by = side==='E'?C:C-HW+4;
+    g.fillStyle='rgba(255,255,255,.8)'; g.fillRect(xbar,by,5,HW-6);
+  }
+}
+function drawSign(g,type,x,y,s){
+  const h=s/2;
+  g.fillStyle='#cfd3d8'; g.fillRect(x-1.5,y,3,14);
+  g.save(); g.translate(x,y-h);
+  if(type==='main'){
+    g.save(); g.rotate(Math.PI/4);
+    g.fillStyle='#fff'; roundRect(g,-h,-h,s,s,3); g.fill();
+    g.fillStyle='#FFCB05'; roundRect(g,-h+4,-h+4,s-8,s-8,2); g.fill();
+    g.restore();
+  } else if(type==='yield'){
+    g.beginPath(); g.moveTo(0,h); g.lineTo(h*0.92,-h*0.78); g.lineTo(-h*0.92,-h*0.78); g.closePath();
+    g.fillStyle='#fff'; g.fill(); g.lineWidth=3.4; g.strokeStyle='#D2202A'; g.lineJoin='round'; g.stroke();
+  } else if(type==='stop'){
+    octagon(g,h*0.92); g.fillStyle='#D2202A'; g.fill();
+    g.fillStyle='#fff'; g.font='bold 9px Arial,sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('STOP',0,1);
+  }
+  g.restore();
+}
+function octagon(g,r){ g.beginPath(); for(let i=0;i<8;i++){ const a=Math.PI/8+i*Math.PI/4; const px=r*Math.cos(a),py=r*Math.sin(a); i?g.lineTo(px,py):g.moveTo(px,py);} g.closePath(); }
+function drawLight(g,x,y){
+  g.save(); g.translate(x,y);
+  g.fillStyle='#15191e'; roundRect(g,-7,-19,14,38,4); g.fill();
+  g.beginPath(); g.arc(0,-11,4.6,0,7); g.fillStyle='#5a1f1c'; g.fill();
+  g.beginPath(); g.arc(0,0,4.6,0,7); g.fillStyle='#5a4f1c'; g.fill();
+  g.shadowColor='#27d76b'; g.shadowBlur=9;
+  g.beginPath(); g.arc(0,11,4.6,0,7); g.fillStyle='#27d76b'; g.fill();
+  g.shadowBlur=0; g.restore();
+}
+function exitDir(from,to){
+  const h=HEAD[from]; if(to==='straight') return h;
+  const key=h[0]+','+h[1];
+  const L={'0,-1':[-1,0],'0,1':[1,0],'1,0':[0,-1],'-1,0':[0,1]};
+  const R={'0,-1':[1,0],'0,1':[-1,0],'1,0':[0,1],'-1,0':[0,-1]};
+  return (to==='left'?L:R)[key];
+}
+function drawPath(g,c){
+  const p=CARPOS[c.from], h=HEAD[c.from];
+  const half=(h[0]!==0)? p.w/2 : p.h/2;
+  const nose=[p.x+h[0]*(half+2), p.y+h[1]*(half+2)];
+  let pts;
+  if(c.to==='straight'){
+    let ex=p.x+h[0]*330, ey=p.y+h[1]*330;
+    ex=Math.min(Math.max(ex,62),398); ey=Math.min(Math.max(ey,62),398);
+    pts=[nose,[ex,ey]];
+  } else {
+    const ed=exitDir(c.from,c.to), exl=EXITLANE[ed[0]+','+ed[1]];
+    const corner=(h[0]!==0)? [exl[0],nose[1]] : [nose[0],exl[1]];
+    pts=[nose,corner,exl];
+  }
+  g.lineCap='round'; g.lineJoin='round';
+  g.strokeStyle='rgba(11,13,16,.35)'; g.lineWidth=9;
+  g.beginPath(); g.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) g.lineTo(pts[i][0],pts[i][1]); g.stroke();
+  g.strokeStyle=c.color; g.globalAlpha=.92; g.lineWidth=6;
+  g.beginPath(); g.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) g.lineTo(pts[i][0],pts[i][1]); g.stroke();
+  g.globalAlpha=1;
+  const a=pts[pts.length-2], b=pts[pts.length-1], ang=Math.atan2(b[1]-a[1],b[0]-a[0]), hl=15;
+  g.beginPath(); g.moveTo(b[0],b[1]); g.lineTo(b[0]-hl*Math.cos(ang-0.42),b[1]-hl*Math.sin(ang-0.42));
+  g.moveTo(b[0],b[1]); g.lineTo(b[0]-hl*Math.cos(ang+0.42),b[1]-hl*Math.sin(ang+0.42)); g.stroke();
+  g.lineCap='butt';
+}
+function drawCar(g,c){
+  const p=CARPOS[c.from], chosen=xrChosen.indexOf(c.id);
+  const w=p.w,h=p.h,front=p.front,x=p.x-w/2,y=p.y-h/2,glass='#bcd3ea';
+  const vert=(front==='up'||front==='down'), rr=(vert?w:h)*0.16;
+  g.fillStyle='rgba(0,0,0,.28)'; roundRect(g,x+3,y+4,w,h,rr); g.fill();
+  g.fillStyle='#15181c';
+  if(vert){ const wl=h*0.16; [y+h*0.22,y+h*0.74].forEach(wy=>{ roundRect(g,x-2,wy,4,wl,2); g.fill(); roundRect(g,x+w-2,wy,4,wl,2); g.fill(); }); }
+  else { const wl=w*0.16; [x+w*0.22,x+w*0.74].forEach(wx=>{ roundRect(g,wx,y-2,wl,4,2); g.fill(); roundRect(g,wx,y+h-2,wl,4,2); g.fill(); }); }
+  g.fillStyle=c.color; roundRect(g,x,y,w,h,rr); g.fill();
+  g.fillStyle=glass;
+  if(vert){ roundRect(g,x+w*0.16,y+h*0.14,w*0.68,h*0.24,3); g.fill();
+    g.globalAlpha=.8; roundRect(g,x+w*0.18,y+h*0.5,w*0.64,h*0.2,3); g.fill(); g.globalAlpha=1; }
+  else { roundRect(g,x+w*0.14,y+h*0.16,w*0.24,h*0.68,3); g.fill();
+    g.globalAlpha=.8; roundRect(g,x+w*0.5,y+h*0.18,w*0.2,h*0.64,3); g.fill(); g.globalAlpha=1; }
+  g.fillStyle='#FFE9A0';
+  const hl=(ax,ay)=>{ g.beginPath(); g.arc(ax,ay,2.6,0,7); g.fill(); };
+  if(front==='up'){hl(x+6,y+3);hl(x+w-6,y+3);}
+  else if(front==='down'){hl(x+6,y+h-3);hl(x+w-6,y+h-3);}
+  else if(front==='right'){hl(x+w-3,y+6);hl(x+w-3,y+h-6);}
+  else {hl(x+3,y+6);hl(x+3,y+h-6);}
+  g.font='bold 27px "Barlow Condensed",Arial,sans-serif'; g.textAlign='center'; g.textBaseline='middle';
+  g.lineWidth=4; g.lineJoin='round'; g.strokeStyle='rgba(0,0,0,.5)'; g.strokeText(c.id,p.x,p.y);
+  g.fillStyle='#fff'; g.fillText(c.id,p.x,p.y);
+  if(chosen>=0){
+    g.beginPath(); g.arc(x,y,12,0,7); g.fillStyle='#1E9D55'; g.fill();
+    g.lineWidth=2.5; g.strokeStyle='#fff'; g.stroke();
+    g.fillStyle='#fff'; g.font='bold 15px "Barlow Condensed",Arial,sans-serif'; g.fillText(chosen+1,x,y+0.5);
+  }
+}
+function roundRect(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+
+/* ============================================================
+   ТАҚЫРЫПТЫҚ ТЕСТ — таңдау
+   ============================================================ */
+function renderTest(){
+  V.innerHTML = `<div class="view"><div class="quiz-setup">
+    <div class="eyebrow">Өзін-өзі тексеру</div>
+    <h1 class="h-sec">Тақырыптық тест</h1>
+    <p class="sub">Тақырыпты таңдаңыз — әр сұрақтан кейін дұрыс жауап пен қысқа түсіндірме бірден көрсетіледі.</p>
+    <div class="topic-list">
+      ${TOPICS.map(t=>{
+        const n=QUESTIONS.filter(q=>q.t===t).length;
+        const best=PROG.topicsBest[t];
+        return `<button class="card topic-card" onclick="startTopic('${t.replace(/'/g,"\\'")}')">
+          <span class="tn">${n}</span>
+          <span class="ti"><b>${t}</b><small>${n} сұрақ</small></span>
+          ${best!=null?`<span class="pass">${best}%</span>`:''}
+        </button>`;
+      }).join('')}
+    </div>
+  </div></div>`;
+}
+function startTopic(t){
+  const qs = shuffle(QUESTIONS.filter(q=>q.t===t));
+  quiz = { mode:'topic', topic:t, qs, idx:0, answers:new Array(qs.length).fill(null), revealed:new Array(qs.length).fill(false) };
+  renderRunner();
+}
+
+/* ============================================================
+   ЕМТИХАН — кіріспе + бастау
+   ============================================================ */
+function renderExam(){
+  const log = (PROG.examLog||[]);
+  V.innerHTML = `<div class="view">
+    <div class="card exam-banner">
+      <div>
+        <h3>Емтихан симуляторы</h3>
+        <p>Нақ мемлекеттік емтихандағыдай: кездейсоқ ${EXAM.q} сұрақ, ${EXAM.min} минут, аралық кері байланыссыз.</p>
+      </div>
+      <div class="exam-facts">
+        <div class="exam-fact"><b>${EXAM.q}</b><span>сұрақ</span></div>
+        <div class="exam-fact"><b>${EXAM.min}</b><span>минут</span></div>
+        <div class="exam-fact"><b>${EXAM.pass}</b><span>өту шегі</span></div>
+        <div class="exam-fact"><b>${EXAM.tries}</b><span>әрекет</span></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin:24px 0">
+      <button class="btn btn-primary" onclick="startExam()">${IC.exam} Емтиханды бастау</button>
+      <div style="font-size:13px;color:var(--muted);margin-top:10px">Жауапсыз қалған сұрақ қате есептеледі. Нәтиже 2 жыл жарамды.</div>
+    </div>
+    ${log.length?`<div class="card" style="padding:18px 20px;max-width:560px;margin:0 auto">
+      <div style="font-family:var(--fd);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:10px">Соңғы әрекеттер</div>
+      ${log.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-top:1px solid var(--line);font-size:14px">
+        <span style="color:var(--muted)">${new Date(e.d).toLocaleDateString('ru-RU')}</span>
+        <span style="font-family:var(--fm);font-weight:700">${e.c}/${EXAM.q}</span>
+        <span style="font-weight:700;color:${e.p?'var(--green)':'var(--red)'}">${e.p?'Өтті':'Өтпеді'}</span>
+      </div>`).join('')}
+    </div>`:''}
+  </div>`;
+}
+function startExam(){
+  const qs = shuffle(QUESTIONS).slice(0, Math.min(EXAM.q, QUESTIONS.length));
+  quiz = { mode:'exam', qs, idx:0, answers:new Array(qs.length).fill(null), flags:new Array(qs.length).fill(false) };
+  renderRunner();
+  startExamTimer();
+}
+
+/* ============================================================
+   ЖҮГІРТКІШ (екі режимге ортақ)
+   ============================================================ */
+function renderRunner(){
+  const q=quiz.qs[quiz.idx], n=quiz.qs.length, i=quiz.idx;
+  const exam=quiz.mode==='exam';
+  const reveal = !exam && quiz.revealed[i];
+  const sel = quiz.answers[i];
+  const fig = q.fig && SIGN_BY[q.fig] ? `<div class="q-fig">${SIGN_BY[q.fig][4]}</div>` : '';
+  const opts = q.o.map((txt,k)=>{
+    let cls='';
+    if(reveal){ if(k===q.a) cls='correct'; else if(k===sel) cls='wrong'; }
+    else if(k===sel) cls='sel';
+    const dis = reveal? 'disabled':'';
+    return `<button class="opt ${cls}" ${dis} onclick="pickOpt(${k})"><span class="key">${LETTERS[k]}</span><span>${txt}</span></button>`;
+  }).join('');
+
+  const top = exam
+    ? `<span class="timer" id="timer">${EXAM.min}:00</span>
+       <div class="qprog"><div class="bar"><div class="fill" style="width:${(i+1)/n*100}%"></div></div><div class="lab">Сұрақ ${i+1} / ${n} · жауап берілді: ${quiz.answers.filter(a=>a!=null).length}</div></div>
+       <button class="btn btn-ghost btn-sm" onclick="quitQuiz()">Шығу</button>`
+    : `<div class="qprog"><div class="bar"><div class="fill" style="width:${(i+1)/n*100}%"></div></div><div class="lab">Сұрақ ${i+1} / ${n} · ${quiz.topic}</div></div>
+       <button class="btn btn-ghost btn-sm" onclick="quitQuiz()">Шығу</button>`;
+
+  const foot = exam
+    ? `<button class="btn btn-ghost btn-sm" ${i===0?'disabled':''} onclick="navQ(-1)">← Алдыңғы</button>
+       <button class="btn ${quiz.flags[i]?'btn-primary':'btn-ghost'} btn-sm" onclick="flagQ()">${IC.flag} Белгілеу</button>
+       ${i<n-1?`<button class="btn btn-dark btn-sm" onclick="navQ(1)">Келесі →</button>`
+              :`<button class="btn btn-primary btn-sm" onclick="examSubmit(false)">Аяқтау</button>`}`
+    : (reveal
+        ? `<span></span>${i<n-1?`<button class="btn btn-dark btn-sm" onclick="navQ(1)">Келесі →</button>`:`<button class="btn btn-primary btn-sm" onclick="finishTopic()">Нәтиже →</button>`}`
+        : `<span style="font-size:13px;color:var(--muted-2);align-self:center">Жауапты таңдаңыз</span><span></span>`);
+
+  const qnav = exam
+    ? `<div class="qnav">${quiz.qs.map((_,k)=>`<button class="${k===i?'cur':(quiz.flags[k]?'flag':(quiz.answers[k]!=null?'done':''))}" onclick="gotoQ(${k})">${k+1}</button>`).join('')}</div>`
+    : '';
+
+  V.innerHTML = `<div class="view"><div class="runner">
+    <div class="runner-top">${top}</div>
+    <div class="card q-card">
+      <div class="q-cat">${q.t}</div>
+      <div class="q-text">${q.q}</div>
+      ${fig}
+      <div class="opts">${opts}</div>
+      <div class="explain ${reveal?'show':''}"><b>Түсіндірме.</b> ${q.ex}</div>
+    </div>
+    <div class="runner-foot">${foot}</div>
+    ${qnav}
+    <div class="kbd-hint"><span class="kbd">1</span>–<span class="kbd">4</span> жауап${exam?` · <span class="kbd">←</span><span class="kbd">→</span> ауысу · <span class="kbd">F</span> белгілеу`:''}</div>
+  </div></div>`;
+}
+function pickOpt(k){
+  const i=quiz.idx;
+  if(quiz.mode==='exam'){ quiz.answers[i]=k; renderRunner(); }
+  else { if(quiz.revealed[i]) return; quiz.answers[i]=k; quiz.revealed[i]=true; renderRunner(); }
+}
+function navQ(d){ const n=quiz.idx+d; if(n>=0&&n<quiz.qs.length){ quiz.idx=n; renderRunner(); window.scrollTo({top:0,behavior:'smooth'}); } }
+function gotoQ(k){ quiz.idx=k; renderRunner(); window.scrollTo({top:0,behavior:'smooth'}); }
+function flagQ(){ quiz.flags[quiz.idx]=!quiz.flags[quiz.idx]; renderRunner(); }
+function quitQuiz(){
+  if(quiz && quiz.mode==='exam' && quiz.answers.some(a=>a!=null)){
+    confirmModal('Емтиханнан шығу?','Берілген жауаптарыңыз сақталмайды әрі нәтиже тіркелмейді.','Шығу',()=>{ stopTimer(); quiz=null; go('exam'); });
+    return;
+  }
+  stopTimer(); quiz=null; go(curView==='exam'?'exam':'test');
+}
+
+/* ---- timer ---- */
+function startExamTimer(){ quiz.deadline=Date.now()+EXAM.min*60000; tickTimer(); quiz.timerId=setInterval(tickTimer,250); }
+function stopTimer(){ if(quiz&&quiz.timerId){ clearInterval(quiz.timerId); quiz.timerId=null; } }
+function tickTimer(){
+  const el=document.getElementById('timer'); if(!el){ return; }
+  let ms=quiz.deadline-Date.now();
+  if(ms<=0){ el.textContent='0:00'; stopTimer(); examSubmit(true); return; }
+  const tot=Math.ceil(ms/1000), m=Math.floor(tot/60), s=tot%60;
+  el.textContent=m+':'+String(s).padStart(2,'0');
+  el.classList.toggle('warn', ms<=60000);
+}
+
+/* ============================================================
+   НӘТИЖЕ
+   ============================================================ */
+function finishTopic(){
+  let correct=0; quiz.qs.forEach((q,i)=>{ if(quiz.answers[i]===q.a) correct++; });
+  const n=quiz.qs.length, pct=Math.round(correct/n*100), pass=pct>=80;
+  PROG.topicsBest[quiz.topic]=Math.max(PROG.topicsBest[quiz.topic]||0,pct); saveProg();
+  showResult({mode:'topic', n, correct, pass, pct, topic:quiz.topic});
+}
+function examSubmit(timeUp){
+  if(!timeUp){
+    const un = quiz.answers.filter(a=>a==null).length;
+    if(un>0){
+      confirmModal('Емтиханды аяқтау?', `${un} сұраққа жауап берілмеген — олар қате болып есептеледі. Жалғастырасыз ба?`, 'Аяқтау', ()=>doExamSubmit(false));
+      return;
+    }
+  }
+  doExamSubmit(timeUp);
+}
+function doExamSubmit(timeUp){
+  stopTimer();
+  let correct=0; quiz.qs.forEach((q,i)=>{ if(quiz.answers[i]===q.a) correct++; });
+  const n=quiz.qs.length, pass=correct>=EXAM.pass;
+  PROG.examTries=(PROG.examTries||0)+1;
+  PROG.examBest=Math.max(PROG.examBest||0,correct);
+  PROG.examLog=(PROG.examLog||[]); PROG.examLog.unshift({d:Date.now(),c:correct,p:pass}); PROG.examLog=PROG.examLog.slice(0,8);
+  saveProg();
+  showResult({mode:'exam', n, correct, pass, timeUp});
+}
+function showResult(r){
+  const wrong = quiz.qs.map((q,i)=>({q,i})).filter(({q,i})=>quiz.answers[i]!==q.a);
+  const badge = r.mode==='exam' ? `${r.correct}` : `${r.pct}<span style="font-size:20px">%</span>`;
+  const sub = r.mode==='exam'
+    ? `${r.correct} дұрыс / ${r.n} · өту шегі ${EXAM.pass}${r.timeUp?' · уақыт бітті':''}`
+    : `${r.topic} · ${r.correct} дұрыс / ${r.n}`;
+  const stats = r.mode==='exam'
+    ? [[r.correct,'Дұрыс жауап'],[r.n-r.correct,'Қате/жауапсыз'],[EXAM.pass,'Қажетті шек']]
+    : [[r.correct,'Дұрыс жауап'],[r.n-r.correct,'Қате жауап'],[r.pct+'%','Нәтиже']];
+  const review = wrong.length ? `
+    <div style="text-align:left;margin-top:24px">
+      <div class="eyebrow" style="margin-bottom:12px">Қателерді талдау (${wrong.length})</div>
+      ${wrong.map(({q,i})=>`<div class="card review-item">
+        <div class="rq">${q.q}</div>
+        ${quiz.answers[i]!=null?`<div class="ra bad">${LETTERS[quiz.answers[i]]}. ${q.o[quiz.answers[i]]}</div>`:`<div class="ra" style="color:var(--muted-2)">— жауап берілмеген</div>`}
+        <div class="ra good">${LETTERS[q.a]}. ${q.o[q.a]}</div>
+        <div class="rex">${q.ex}</div>
+      </div>`).join('')}
+    </div>` : `<div class="card" style="margin-top:22px;padding:20px;background:var(--green-soft);border-color:#bfe6cd"><b style="color:var(--green)">Тамаша — барлық жауап дұрыс!</b></div>`;
+
+  const actions = r.mode==='exam'
+    ? `<button class="btn btn-primary" onclick="startExam()">Қайта тапсыру</button><button class="btn btn-ghost" onclick="go('home')">Басты бетке</button>`
+    : `<button class="btn btn-primary" onclick="startTopic('${r.topic.replace(/'/g,"\\'")}')">Қайталау</button><button class="btn btn-ghost" onclick="go('test')">Басқа тақырып</button>`;
+
+  V.innerHTML = `<div class="view"><div class="result">
+    <div class="result-badge ${r.pass?'pass':'fail'}">${badge}</div>
+    <h2>${r.pass?'Өттіңіз':'Әлі дайын емес'}</h2>
+    <div class="rsum">${sub}</div>
+    <div class="result-stats">
+      ${stats.map(([n,l])=>`<div class="card" style="padding:16px"><div style="font-family:var(--fm);font-weight:700;font-size:26px">${n}</div><div style="font-size:12.5px;color:var(--muted);margin-top:3px">${l}</div></div>`).join('')}
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">${actions}</div>
+    ${review}
+  </div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============================================================
+   АЙЫППҰЛ КЕСТЕСІ
+   ============================================================ */
+function renderFines(){
+  const col = {low:'#1E9D55',mid:'#F2A900',high:'#E0392F'};
+  V.innerHTML = `<div class="view">
+    <div class="eyebrow">Жауапкершілік</div>
+    <h1 class="h-sec">Айыппұл кестесі</h1>
+    <p class="sub">2026 жылғы айлық есептік көрсеткіш (АЕК) негізінде. Жаза мөлшері АЕК-пен белгіленеді де, тиісті теңге сомасына шығарылады.</p>
+    <div class="fine-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1" stroke-linecap="round"/></svg>
+      <div><b>1 АЕК = ${fmtTg(MRP)}</b> (2026 ж.). Көп бұзушылық бойынша айыппұлды <b>7 күн ішінде</b> төлесеңіз — <b>50% жеңілдік</b> қолданылады. Кесте оқуға арналған; нақты мөлшер хаттама толтыру сәтінде анықталады.</div>
+    </div>
+    <table class="fines-tbl">
+      <thead><tr><th>Бұзушылық</th><th>АЕК</th><th>Сома</th></tr></thead>
+      <tbody>
+        ${FINES.map(([s,t,m])=>`<tr>
+          <td><span class="sev" style="background:${col[s]}"></span>${t}</td>
+          <td class="mrp">${m==='dep'?'—':m+' АЕК'}</td>
+          <td class="tg">${m==='dep'?'Құқықтан айыру':fmtTg(m*MRP)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <div class="foot">Толық тізбе мен өзгерістер — ҚР Әкімшілік құқық бұзушылық туралы кодексі. Қайталанған бұзушылықтар үшін мөлшер жоғарылайды.</div>
+  </div>`;
+}
+
+/* ============================================================
+   ІСКЕ ҚОСУ
+   ============================================================ */
+/* ============================================================
+   ВИДЕО САБАҚТАР — анимациялық демонстрациялар (canvas) + дереккөздер
+   ============================================================ */
+let vAnim={}, vRAF=null, vLast=0;
+const VW=480, VH=300;
+const vlerp=(a,b,p)=>a+(b-a)*clamp(p,0,1);
+function vCarX(start,v,tb,db,t){ if(t<=tb) return start+v*t; const tau=Math.min(t-tb,db); return start+v*tb+v*tau-(v/(2*db))*tau*tau; }
+
+/* ---- top-down road helpers (trainer style) ---- */
+function vGround(g){ g.fillStyle='#1b2025'; g.fillRect(0,0,VW,VH); }
+function vAspV(g,cx,rw){ g.fillStyle='#3b4147'; g.fillRect(cx-rw,0,rw*2,VH); }
+function vAspH(g,cy,rw){ g.fillStyle='#3b4147'; g.fillRect(0,cy-rw,VW,rw*2); }
+function vEdgeV(g,cx,rw,y0,y1){ g.strokeStyle='rgba(255,255,255,.5)'; g.lineWidth=2.5; g.beginPath(); g.moveTo(cx-rw+4,y0);g.lineTo(cx-rw+4,y1); g.moveTo(cx+rw-4,y0);g.lineTo(cx+rw-4,y1); g.stroke(); }
+function vEdgeH(g,cy,rw,x0,x1){ g.strokeStyle='rgba(255,255,255,.5)'; g.lineWidth=2.5; g.beginPath(); g.moveTo(x0,cy-rw+4);g.lineTo(x1,cy-rw+4); g.moveTo(x0,cy+rw-4);g.lineTo(x1,cy+rw-4); g.stroke(); }
+function vDashV(g,cx,y0,y1){ g.strokeStyle='#F4C20D'; g.lineWidth=3; g.setLineDash([14,11]); g.lineCap='round'; g.beginPath(); g.moveTo(cx,y0);g.lineTo(cx,y1); g.stroke(); g.setLineDash([]); g.lineCap='butt'; }
+function vDashH(g,cy,x0,x1){ g.strokeStyle='#F4C20D'; g.lineWidth=3; g.setLineDash([14,11]); g.lineCap='round'; g.beginPath(); g.moveTo(x0,cy);g.lineTo(x1,cy); g.stroke(); g.setLineDash([]); g.lineCap='butt'; }
+function vCross(g,cx,cy,rw){
+  vAspV(g,cx,rw); vAspH(g,cy,rw);
+  vEdgeV(g,cx,rw,0,cy-rw); vEdgeV(g,cx,rw,cy+rw,VH);
+  vEdgeH(g,cy,rw,0,cx-rw); vEdgeH(g,cy,rw,cx+rw,VW);
+  vDashV(g,cx,8,cy-rw-10); vDashV(g,cx,cy+rw+10,VH-8);
+  vDashH(g,cy,8,cx-rw-10); vDashH(g,cy,cx+rw+10,VW-8);
+}
+function vZebraH(g,xc,cy,rw){ g.fillStyle='rgba(255,255,255,.85)'; for(let i=0;i<5;i++){ const y=cy-rw+5+i*((rw*2-10)/5); g.fillRect(xc-13,y,26,7); } }
+function vMiniSign(g,kind,x,y){
+  const s=24,h=s/2;
+  g.fillStyle='#cfd3d8'; g.fillRect(x-1.3,y,2.6,11);
+  g.save(); g.translate(x,y-h);
+  if(kind==='main'){ g.save(); g.rotate(Math.PI/4); g.fillStyle='#fff'; roundRect(g,-h,-h,s,s,2.5); g.fill(); g.fillStyle='#FFCB05'; roundRect(g,-h+3,-h+3,s-6,s-6,2); g.fill(); g.restore(); }
+  else if(kind==='yield'){ g.beginPath(); g.moveTo(0,h); g.lineTo(h*0.9,-h*0.78); g.lineTo(-h*0.9,-h*0.78); g.closePath(); g.fillStyle='#fff'; g.fill(); g.lineWidth=2.8; g.strokeStyle='#D2202A'; g.lineJoin='round'; g.stroke(); }
+  g.restore();
+}
+function vLight(g,x,y,phase){
+  g.save(); g.translate(x,y);
+  g.fillStyle='#15191e'; roundRect(g,-8,-22,16,44,5); g.fill();
+  const lamp=(cy,col,on)=>{ if(on){g.shadowColor=col;g.shadowBlur=9;} g.beginPath(); g.arc(0,cy,5,0,7); g.fillStyle=on?col:'rgba(255,255,255,.12)'; g.fill(); g.shadowBlur=0; };
+  lamp(-13,'#ff4438', phase==='red'||phase==='redamber');
+  lamp(0,'#ffb400', phase==='redamber'||phase==='amber');
+  lamp(13,'#27d76b', phase==='green');
+  g.restore();
+}
+function vPerson(g,x,y,col){
+  col=col||'#13161a';
+  g.fillStyle=col; g.beginPath(); g.arc(x,y,4.6,0,7); g.fill();
+  g.strokeStyle=col; g.lineWidth=3.3; g.lineCap='round'; g.lineJoin='round'; g.beginPath();
+  g.moveTo(x,y+4); g.lineTo(x,y+13);
+  g.moveTo(x,y+7); g.lineTo(x-5,y+10); g.moveTo(x,y+7); g.lineTo(x+5,y+10);
+  g.moveTo(x,y+13); g.lineTo(x-4,y+20); g.moveTo(x,y+13); g.lineTo(x+4,y+20);
+  g.stroke(); g.lineCap='butt';
+}
+function vCar(g,cx,cy,dir,color,brake,len,wid){
+  len=len||46; wid=wid||26;
+  const horiz=(dir==='left'||dir==='right');
+  const w=horiz?len:wid, h=horiz?wid:len, x=cx-w/2, y=cy-h/2, glass='#bcd3ea', rr=Math.min(w,h)*0.26;
+  g.fillStyle='rgba(0,0,0,.25)'; roundRect(g,x+2,y+3,w,h,rr); g.fill();
+  g.fillStyle='#15181c';
+  if(!horiz){ [y+h*0.16,y+h*0.70].forEach(wy=>{roundRect(g,x-2,wy,3.5,h*0.16,2);g.fill();roundRect(g,x+w-1.5,wy,3.5,h*0.16,2);g.fill();}); }
+  else { [x+w*0.16,x+w*0.70].forEach(wx=>{roundRect(g,wx,y-2,w*0.16,3.5,2);g.fill();roundRect(g,wx,y+h-1.5,w*0.16,3.5,2);g.fill();}); }
+  g.fillStyle=color; roundRect(g,x,y,w,h,rr); g.fill();
+  g.fillStyle=glass;
+  if(dir==='up'){ roundRect(g,x+w*0.16,y+h*0.15,w*0.68,h*0.2,2);g.fill(); g.globalAlpha=.72;roundRect(g,x+w*0.18,y+h*0.56,w*0.64,h*0.16,2);g.fill();g.globalAlpha=1; }
+  else if(dir==='down'){ roundRect(g,x+w*0.16,y+h*0.65,w*0.68,h*0.2,2);g.fill(); g.globalAlpha=.72;roundRect(g,x+w*0.18,y+h*0.28,w*0.64,h*0.16,2);g.fill();g.globalAlpha=1; }
+  else if(dir==='right'){ roundRect(g,x+w*0.65,y+h*0.16,w*0.2,h*0.68,2);g.fill(); g.globalAlpha=.72;roundRect(g,x+w*0.28,y+h*0.18,w*0.16,h*0.64,2);g.fill();g.globalAlpha=1; }
+  else { roundRect(g,x+w*0.15,y+h*0.16,w*0.2,h*0.68,2);g.fill(); g.globalAlpha=.72;roundRect(g,x+w*0.56,y+h*0.18,w*0.16,h*0.64,2);g.fill();g.globalAlpha=1; }
+  const dot=(px,py,c,r)=>{g.beginPath();g.arc(px,py,r||2.4,0,7);g.fillStyle=c;g.fill();};
+  let fp,rp;
+  if(dir==='up'){fp=[[x+5,y+2],[x+w-5,y+2]];rp=[[x+5,y+h-2],[x+w-5,y+h-2]];}
+  else if(dir==='down'){fp=[[x+5,y+h-2],[x+w-5,y+h-2]];rp=[[x+5,y+2],[x+w-5,y+2]];}
+  else if(dir==='right'){fp=[[x+w-2,y+5],[x+w-2,y+h-5]];rp=[[x+2,y+5],[x+2,y+h-5]];}
+  else {fp=[[x+2,y+5],[x+2,y+h-5]];rp=[[x+w-2,y+5],[x+w-2,y+h-5]];}
+  fp.forEach(p=>dot(p[0],p[1],'#FFE9A0'));
+  if(brake){g.shadowColor='#ff3b30';g.shadowBlur=7;}
+  rp.forEach(p=>dot(p[0],p[1],brake?'#ff4438':'#6e1410',brake?2.9:2.1));
+  g.shadowBlur=0;
+}
+
+/* ---- lesson draw functions ---- */
+function drawLights(g,t){
+  vGround(g); const cx=240, rw=46, sy=196;
+  vAspV(g,cx,rw); vEdgeV(g,cx,rw,0,VH); vDashV(g,cx,8,VH-8);
+  g.fillStyle='rgba(255,255,255,.7)'; g.fillRect(cx-rw+3,sy,rw*2-6,5);
+  let phase = t<3?'red': t<4?'redamber': t<7.5?'green':'amber';
+  vLight(g,cx+rw+22,86,phase);
+  let cyCar;
+  if(t<4) cyCar=sy+36; else if(t<7.5) cyCar=vlerp(sy+36,-50,(t-4)/3.5); else cyCar=-60;
+  if(cyCar>-50) vCar(g,cx+22,cyCar,'up','#1B5FB0', t<4);
+}
+function drawGiveway(g,t){
+  vGround(g); const cx=240,cy=150,rw=46; vCross(g,cx,cy,rw);
+  const aStop=cy+rw+18;
+  let ay = t<2.5? vlerp(300,aStop,t/2.5) : t<4.2? aStop : vlerp(aStop,-55,(t-4.2)/2.6);
+  let bx = vlerp(525,-55,t/4);
+  if(bx>-45) vCar(g,bx,cy-22,'left','#F2A900',false);
+  if(ay>-45) vCar(g,cx+22,ay,'up','#1B5FB0', (t>=2.2&&t<4.2));
+}
+function drawMain(g,t){
+  vGround(g); const cx=240,cy=150,rw=46; vCross(g,cx,cy,rw);
+  vMiniSign(g,'main', cx-rw-15, cy+rw+15);
+  vMiniSign(g,'yield', cx+rw+15, cy+rw+15);
+  let ax = vlerp(-55,535,t/4);
+  const bStop=cy+rw+18;
+  let by = t<2.5? vlerp(300,bStop,t/2.5) : t<4.2? bStop : vlerp(bStop,-55,(t-4.2)/2.6);
+  if(ax<535) vCar(g,ax,cy+22,'right','#F2A900',false);
+  if(by>-45) vCar(g,cx+22,by,'up','#1B5FB0', (t>=2.2&&t<4.2));
+}
+function drawPed(g,t){
+  vGround(g); const cy=150,rw=50, zx=212; vAspH(g,cy,rw); vEdgeH(g,cy,rw,0,VW);
+  vDashH(g,cy,8,zx-16); vDashH(g,cy,zx+16,VW-8); vZebraH(g,zx,cy,rw);
+  g.fillStyle='rgba(255,255,255,.7)'; g.fillRect(zx-22,cy+3,5,rw-4);
+  const carStop=zx-46;
+  let cxC = t<2.5? vlerp(-55,carStop,t/2.5) : t<6? carStop : vlerp(carStop,545,(t-6)/2);
+  let py = t<2.5? cy+rw+14 : t<3? vlerp(cy+rw+14,cy+rw-6,(t-2.5)/0.5) : t<6? vlerp(cy+rw-6,cy-rw-14,(t-3)/3) : cy-rw-14;
+  if(cxC<545) vCar(g,cxC,cy+22,'right','#1B5FB0', (t>=2.3&&t<6));
+  vPerson(g,zx,py,'#13161a');
+}
+function drawDist(g,t){
+  vGround(g); const cy=150,rw=44; vAspH(g,cy,rw); vEdgeH(g,cy,rw,0,VW); vDashH(g,cy,8,VW-8);
+  const leadX=vCarX(140,72,3,1.6,t), folX=vCarX(-14,72,3.8,1.6,t);
+  const leadBrk=(t>3&&t<4.6), folBrk=(t>3.8&&t<5.4);
+  if(folX<545) vCar(g,folX,cy,'right','#1B5FB0',folBrk);
+  if(leadX<545) vCar(g,leadX,cy,'right','#F2A900',leadBrk);
+  if(t>5.6 && leadX<545){
+    const x1=folX+23+4, x2=leadX-23-4, gy=cy-rw+15;
+    g.strokeStyle='#27d76b'; g.lineWidth=2; g.setLineDash([4,4]); g.beginPath(); g.moveTo(x1,gy); g.lineTo(x2,gy); g.stroke();
+    g.beginPath(); g.moveTo(x1,gy-4);g.lineTo(x1,gy+4); g.moveTo(x2,gy-4);g.lineTo(x2,gy+4); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#27d76b'; g.font='600 11px Barlow,sans-serif'; g.textAlign='center'; g.fillText('қауіпсіз ара қашықтық',(x1+x2)/2,gy-6);
+  }
+}
+
+const VLESSONS=[
+ {id:'lights', t:'Бағдаршам сигналдары', dur:9, draw:drawLights,
+   d:'Қызыл, сары, жасыл сигналдардың мағынасы.',
+   steps:[{t:0,txt:'Қызыл — толық тоқта, тоқтау сызығынан өтпе.'},{t:3,txt:'Қызыл + сары — қозғалуға дайындал, бірақ әлі тұр.'},{t:4,txt:'Жасыл — жол ашық, абайлап қозғал.'},{t:7.5,txt:'Сары — қозғалысты доғар, қиылысты босат.'}]},
+ {id:'giveway', t:'Тең қиылыс · «оңнан кедергі»', dur:8, draw:drawGiveway,
+   d:'Белгісіз тең жолда оң жақтағы көлікке жол беріледі.',
+   steps:[{t:0,txt:'Белгі жоқ — тең қиылыс. «Оңнан кедергі» ережесі.'},{t:2.5,txt:'Көк үшін сары көлік — оң жақта. Сондықтан көк жол береді.'},{t:4.2,txt:'Сары өтіп болған соң, көк көлік қозғалады.'},{t:6.5,txt:'Кезек: 1) сары, 2) көк.'}]},
+ {id:'main', t:'Басты жол басымдығы', dur:8, draw:drawMain,
+   d:'Басты жолдағы көлік қосалқыдан шыққаннан бұрын өтеді.',
+   steps:[{t:0,txt:'Сары — басты жолда (ромб белгі). Көк — қосалқыда («Жол беріңіз»).'},{t:2.5,txt:'Қосалқыдағы көк көлік басты жолдағы сарыға жол береді.'},{t:4.2,txt:'Сары өткен соң көк көлік қозғалады.'},{t:6.5,txt:'Басты жол қиылыс бойы басым болады.'}]},
+ {id:'ped', t:'Жаяу жүргіншілер өткелі', dur:8, draw:drawPed,
+   d:'«Зебра» алдында жаяу жүргіншіге жол беру.',
+   steps:[{t:0,txt:'Алда «зебра» — жаяу жүргіншіге дайын бол.'},{t:2.5,txt:'Адам өткелге шықты — көлік тоқтайды.'},{t:3,txt:'Жаяу жүргінші өтіп жатыр — толық тоқта.'},{t:6,txt:'Өткел босады — енді қозғалуға болады.'}]},
+ {id:'dist', t:'Қауіпсіз ара қашықтық', dur:8, draw:drawDist,
+   d:'Алдыңғы көлікпен қашықтық сақтау — кенет тежеуде қауіпсіз тоқтайсыз.',
+   steps:[{t:0,txt:'Алдыңғы көлікпен қауіпсіз қашықтық сақта.'},{t:3,txt:'Алдыңғы көлік кенет тежеді.'},{t:3.8,txt:'Қашықтық жеткілікті — артқы көлік те қауіпсіз тежейді.'},{t:5.6,txt:'Дұрыс ара қашықтық соқтығысты болдырмайды.'}]}
+];
+
+function vResourcesHTML(){
+  const R=[
+   ['24pdd.kz','ҚР ЖҚЕ толық теориясы мен тесттері — қазақша, орысша, ағылшынша. Әр тарау бойынша түсіндірмесі бар.','https://24pdd.kz/exam-pdd-kz/'],
+   ['pddtest.kz','СпецЦОН-да қолданылатын ресми тесттер және практикалық емтиханға арналған видеосабақтар.','https://pddtest.kz/kk'],
+   ['«Рули Онлайн Қазақстан» · YouTube','ҚР ЖҚЕ бойынша тегін видеокурс — сабақтарды кезекпен қарауға болады.','https://www.youtube.com/@rulionline'],
+   ['adilet.zan.kz','Жол жүрісі қағидаларының ресми толық мәтіні (мемлекеттік құқықтық дереккөз).','https://adilet.zan.kz/kaz/docs/P970001650_'],
+   ['YouTube іздеу','«ПДД Казахстан видеоурок қазақша» бойынша өзекті видеолар топтамасы.','https://www.youtube.com/results?search_query=%D0%9F%D0%94%D0%94+%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD+%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%D1%83%D1%80%D0%BE%D0%BA+%D2%9B%D0%B0%D0%B7%D0%B0%D2%9B%D1%88%D0%B0']
+  ];
+  return `<div class="eyebrow" style="margin:28px 0 10px">Сыртқы видеокурстар мен дереккөздер</div>
+   <div class="res-list">${R.map(([t,d,u])=>`<a class="card res-card" href="${u}" target="_blank" rel="noopener noreferrer">
+     <div class="res-ic">${IC.play}</div><div class="res-tx"><b>${t}</b><span>${d}</span></div><div class="res-go">${IC.arrow}</div></a>`).join('')}</div>
+   <p class="vid-note">Сілтемелер сыртқы сайттарға жетелейді. Нақты емтихан мазмұны мен айыппұл мөлшері уәкілетті орган бекіткен ресми дереккөзбен тексеріледі.</p>`;
+}
+
+function renderVideo(){
+  if(vRAF){ cancelAnimationFrame(vRAF); vRAF=null; } vAnim={};
+  V.innerHTML = `<div class="view">
+    <div class="eyebrow">Видео сабақтар</div>
+    <h1 class="h-sec">Қозғалыстағы түсіндірме</h1>
+    <p class="sub">Әр сабақ — қолданба ішінде ойнайтын анимация: күрделі жол жағдайларын көзбен көріп, тез түсінесіз. Төменде нақты видеокурстарға сілтемелер де берілген.</p>
+    <div class="vid-grid">
+      ${VLESSONS.map(L=>`<div class="card vid-card">
+        <div class="vid-head"><b>${L.t}</b><span>${L.d}</span></div>
+        <div class="vid-stage"><canvas id="vc_${L.id}" width="${VW}" height="${VH}"></canvas></div>
+        <div class="vid-cap" id="vcap_${L.id}"></div>
+        <div class="vid-ctrls">
+          <button class="btn btn-ghost btn-sm" id="vbtn_${L.id}" onclick="vToggle('${L.id}')">Кідірту</button>
+          <button class="btn btn-ghost btn-sm" onclick="vReplay('${L.id}')">Қайтадан</button>
+        </div>
+      </div>`).join('')}
+    </div>
+    ${vResourcesHTML()}
+  </div>`;
+  const dpr=window.devicePixelRatio||1;
+  VLESSONS.forEach(L=>{
+    const cv=document.getElementById('vc_'+L.id), ctx=cv.getContext('2d');
+    cv.width=VW*dpr; cv.height=VH*dpr; ctx.scale(dpr,dpr);
+    vAnim[L.id]={ctx, t:0, dur:L.dur, draw:L.draw, steps:L.steps, cap:document.getElementById('vcap_'+L.id), playing:true};
+  });
+  vLast=0; vRAF=requestAnimationFrame(vLoop);
+}
+function vLoop(ts){
+  const dt = vLast? Math.min((ts-vLast)/1000,0.05) : 0; vLast=ts;
+  for(const id in vAnim){ const p=vAnim[id];
+    if(p.playing){ p.t+=dt; if(p.t>=p.dur) p.t-=p.dur; }
+    p.ctx.clearRect(0,0,VW,VH); p.draw(p.ctx,p.t);
+    let st=p.steps[0]; for(const s of p.steps) if(p.t>=s.t) st=s;
+    if(p.cap && p.cap._cur!==st.txt){ p.cap.textContent=st.txt; p.cap._cur=st.txt; }
+  }
+  vRAF=requestAnimationFrame(vLoop);
+}
+function vToggle(id){ const p=vAnim[id]; if(!p) return; p.playing=!p.playing; const b=document.getElementById('vbtn_'+id); if(b) b.textContent=p.playing?'Кідірту':'Ойнату'; }
+function vReplay(id){ const p=vAnim[id]; if(!p) return; p.t=0; p.playing=true; const b=document.getElementById('vbtn_'+id); if(b) b.textContent='Кідірту'; }
+
+applyTheme(Store.get('jol_theme') || ((window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) ? 'dark' : 'light'));
+renderNav();
+renderHome();
+
+</script>
+</body>
+</html>
